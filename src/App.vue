@@ -1,7 +1,7 @@
 <template>
   <div class="todo">
     <div class="title has-text-centred">
-      ToDo
+      Umfragen-App:
     </div>
 
     <form
