@@ -1,3 +1,4 @@
+
 <template>
   <main class="app">
     <h1>Die Umfrage</h1>
@@ -11,14 +12,8 @@
 					v-for="(option, index) in getCurrentQuestion.options" 
 					:for="'option' + index" 
 					:class="`option ${
-						getCurrentQuestion.selected == index 
-							? index == getCurrentQuestion.answer 
-								? 'correct' 
-								: 'wrong'
-							: ''
-					} ${
-						getCurrentQuestion.selected != null &&
-						index != getCurrentQuestion.selected
+						getCurrentQuestion.selected[getCurrentQuestion.selected.length - 1] != null &&
+						index != getCurrentQuestion.selected[getCurrentQuestion.selected.length - 1]
 							? 'disabled'
 							: ''
 					}`">
@@ -27,8 +22,8 @@
 						:id="'option' + index" 
 						:name="getCurrentQuestion.index" 
 						:value="index" 
-						v-model="getCurrentQuestion.selected" 
-						:disabled="getCurrentQuestion.selected"
+						v-model="getCurrentQuestion.selected[getCurrentQuestion.selected.length - 1]" 
+						:disabled="getCurrentQuestion.selected[getCurrentQuestion.selected.length - 1]"
 						@change="SetAnswer" 
 					/>
 					<span>{{ option }}</span>
@@ -42,11 +37,12 @@
 				{{ 
 					getCurrentQuestion.index == questions.length - 1 
 						? 'Finish' 
-						: getCurrentQuestion.selected == null
+						: getCurrentQuestion.selected[getCurrentQuestion.selected.length - 1] == null
 							? 'Select an option'
 							: 'Next question'
 				}}
 			</button>
+      <h3>{{ getCurrentQuestion.selected }}</h3>
     </section>
 
     <section v-else>
@@ -63,7 +59,6 @@
     box-sizing: border-box;
     font-family: 'Monsterrat', sans-serif;
   }
-
   body {
     background-color: #3d1771;
     color: #FFF;
@@ -74,12 +69,11 @@
   import { ref, computed, onMounted } from 'vue'
   import {collection, onSnapshot, doc, updateDoc} from 'firebase/firestore'
   import { db } from '@/firebase'
-
   const questions = ref([{}])
   const umfragenCollectionRef = collection(db,'Umfragen')
   const quizCompleted = ref(false)
   const currentQuestion = ref(0)
-  const auswahl = null
+  const auswahl = []
 
   onMounted(() => {
     onSnapshot(umfragenCollectionRef, (querySnapshot) => {
@@ -93,10 +87,15 @@
         }
         fbQuestions.push(frage)
       })
+
+      //Immer ein neues Element in das Antwort Array reinschreiben
+      //Damit kann geprüft werden, ob dieses letzte Element gesetzt wurde / eine Auswahl getätigt wurde
+      // getCurrentQuestion.selected[getCurrentQuestion.selected.length - 1] == null
+      //Mögliches Problem: Was wenn mehrere Leute gleichzeitig eine Antwort abgeben?!
+      fbQuestions.push(null)
     questions.value = fbQuestions
     })
   })
-
   const getCurrentQuestion = computed(() => {
     let question = questions.value[currentQuestion.value]
     question.index = currentQuestion.value
@@ -105,17 +104,29 @@
   const SetAnswer = (e) => {
     questions.value[currentQuestion.value].selected = e.target.value
     e.target.value = null
-
     //e.target.value müsste die Option sein, welche man anklickt
-
   }
-
+  
   const setSelected = (id, auswahl) => {
+    //Array aus dem Dokument abrufen
+    if (doc(umfragenCollectionRef, id).exists) {
+      const selectedArray = doc(umfragenCollectionRef, id).data().selected
+
+      //Aktualisieren des zwischengespeicherten Arrays mit neuem Wert 
+      selectedArray[selectedArray.length - 1] = auswahl
+    }
+
+    //Dokument in Firebase mit aktualisierem Array überschreuben
+    updateDoc(doc(umfragenCollectionRef, id),{
+      selected: selectedArray
+    })
+
+    /*
     updateDoc(doc(umfragenCollectionRef, id), {
     selected: auswahl
     });
+    */
   }
-
   const NextQuestion = () => {
     if (currentQuestion.value < questions.value.length - 1) {
       currentQuestion.value++
