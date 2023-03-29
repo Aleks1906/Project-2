@@ -42,7 +42,7 @@
 							: 'Next question'
 				}}
 			</button>
-      <h3>{{ getCurrentQuestion.selected }}</h3>
+      <h3>{{ getCurrentQuestion.selected }}</h3> 
     </section>
 
     <section v-else>
@@ -66,14 +66,15 @@
 </style>
 
 <script setup>
-  import { ref, computed, onMounted } from 'vue'
-  import {collection, onSnapshot, doc, updateDoc} from 'firebase/firestore'
+  import { ref, computed, onMounted, resolveDirective } from 'vue'
+  import {collection, onSnapshot, doc, updateDoc, FieldValue, arrayUnion, getFirestore} from 'firebase/firestore';
+  import * as firebase from 'firebase/app'
+
   import { db } from '@/firebase'
   const questions = ref([{}])
   const umfragenCollectionRef = collection(db,'Umfragen')
   const quizCompleted = ref(false)
   const currentQuestion = ref(0)
-  const auswahl = []
 
   onMounted(() => {
     onSnapshot(umfragenCollectionRef, (querySnapshot) => {
@@ -85,14 +86,12 @@
           question: doc.data().question,
           selected: doc.data().selected
         }
+
+        if(frage.selected != null) {
+          frage.selected.push(null)
+        }
         fbQuestions.push(frage)
       })
-
-      //Immer ein neues Element in das Antwort Array reinschreiben
-      //Damit kann geprüft werden, ob dieses letzte Element gesetzt wurde / eine Auswahl getätigt wurde
-      // getCurrentQuestion.selected[getCurrentQuestion.selected.length - 1] == null
-      //Mögliches Problem: Was wenn mehrere Leute gleichzeitig eine Antwort abgeben?!
-      fbQuestions.push(null)
     questions.value = fbQuestions
     })
   })
@@ -107,7 +106,23 @@
     //e.target.value müsste die Option sein, welche man anklickt
   }
   
-  const setSelected = (id, auswahl) => {
+   async function setSelected (id, auswahl) {
+    console.log(id)
+    console.log(auswahl)
+
+    /*
+    const ref = doc(umfragenCollectionRef, id)
+   await updateDoc(doc(umfragenCollectionRef, id), {
+      selected: arrayUnion(auswahl)
+    })
+    */
+
+    const pathRef = doc(db, 'Umfragen', id);
+    await updateDoc(pathRef , {
+        selected: arrayUnion(auswahl.toString())
+    });
+
+    /*
     //Array aus dem Dokument abrufen
     if (doc(umfragenCollectionRef, id).exists) {
       const selectedArray = doc(umfragenCollectionRef, id).data().selected
