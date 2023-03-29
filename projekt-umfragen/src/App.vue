@@ -32,17 +32,17 @@
       </div>
 
       <button 
-				@click="setSelected(getCurrentQuestion.id, getCurrentQuestion.selected), NextQuestion()" 
+				@click="setSelected(getCurrentQuestion.id, getCurrentQuestion.selectedLocal, getCurrentQuestion.selected), NextQuestion()" 
 				:disabled="!getCurrentQuestion.selected">
 				{{ 
 					getCurrentQuestion.index == questions.length - 1 
 						? 'Finish' 
-						: getCurrentQuestion.selected[getCurrentQuestion.selected.length - 1] == null
+						: getCurrentQuestion.selected == null
 							? 'Select an option'
 							: 'Next question'
 				}}
 			</button>
-      <h3>{{ getCurrentQuestion.selected }}</h3> 
+      <!-- <h3>{{ getCurrentQuestion.selected }}</h3> -->
     </section>
 
     <section v-else>
@@ -71,10 +71,12 @@
   import * as firebase from 'firebase/app'
 
   import { db } from '@/firebase'
+  import path from 'path';
   const questions = ref([{}])
   const umfragenCollectionRef = collection(db,'Umfragen')
   const quizCompleted = ref(false)
   const currentQuestion = ref(0)
+  
 
   onMounted(() => {
     onSnapshot(umfragenCollectionRef, (querySnapshot) => {
@@ -84,12 +86,14 @@
           id: doc.id,
           options: doc.data().options,
           question: doc.data().question,
-          selected: doc.data().selected
+          selected: doc.data().selected,
+          selectedLocal: null
         }
 
-        if(frage.selected != null) {
-          frage.selected.push(null)
-        }
+
+        frage.selected.push(null)
+        
+
         fbQuestions.push(frage)
       })
     questions.value = fbQuestions
@@ -101,46 +105,19 @@
     return question
   })
   const SetAnswer = (e) => {
-    questions.value[currentQuestion.value].selected = e.target.value
+    questions.value[currentQuestion.value].selectedLocal = e.target.value
     e.target.value = null
     //e.target.value müsste die Option sein, welche man anklickt
   }
+
   
-   async function setSelected (id, auswahl) {
-    console.log(id)
-    console.log(auswahl)
-
-    /*
-    const ref = doc(umfragenCollectionRef, id)
-   await updateDoc(doc(umfragenCollectionRef, id), {
-      selected: arrayUnion(auswahl)
-    })
-    */
-
-    const pathRef = doc(db, 'Umfragen', id);
-    await updateDoc(pathRef , {
-        selected: arrayUnion(auswahl.toString())
-    });
-
-    /*
-    //Array aus dem Dokument abrufen
-    if (doc(umfragenCollectionRef, id).exists) {
-      const selectedArray = doc(umfragenCollectionRef, id).data().selected
-
-      //Aktualisieren des zwischengespeicherten Arrays mit neuem Wert 
-      selectedArray[selectedArray.length - 1] = auswahl
-    }
-
+   async function setSelected (id, auswahl, selectedArray) {
+    //Aktualisieren des zwischengespeicherten Arrays mit neuem Wert 
+    selectedArray[selectedArray.length - 1] = auswahl
     //Dokument in Firebase mit aktualisierem Array überschreuben
-    updateDoc(doc(umfragenCollectionRef, id),{
+    await updateDoc(doc(umfragenCollectionRef, id),{
       selected: selectedArray
     })
-
-    /*
-    updateDoc(doc(umfragenCollectionRef, id), {
-    selected: auswahl
-    });
-    */
   }
   const NextQuestion = () => {
     if (currentQuestion.value < questions.value.length - 1) {
