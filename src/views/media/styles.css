@@ -1,0 +1,327 @@
+@font-face {
+    font-family: 'Inter';
+    src: url(./font/Inter-Regular.ttf);
+}
+@font-face {
+    font-family: 'Inter';
+    src: url(./font/Inter-Bold.ttf);
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'Inter';
+    src: url(./font/Inter-ExtraBold.ttf);
+    font-weight: 800;
+}
+
+:root {
+    --polly_dark_background: #FF00F5;
+    --polly_light_background: #F7F7F7;
+    --polly_accent_yellow: #FAD223;
+    --text_light_background: #AD00FF;
+    --text_dark_background: #FFF;
+    --textbox_background: rgba(235, 235, 235, .5);
+}
+
+/* == GENERELL == */
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(134.82deg, #FF00F5 0, #AD00FF 73.73%);
+    background-repeat: no-repeat;
+    min-height: 100%;
+    margin: 0;
+}
+
+a:link {
+    text-decoration: none;
+    transition: 800ms;
+    color: var(--polly_accent_yellow);
+}
+a:visited {
+    text-decoration: none;
+    transition: 800ms;
+    color: var(--polly_accent_yellow);
+}
+a:hover {
+    text-decoration: none;
+    transition: 400ms;
+    color: #2B2B2B;
+}
+a:active {
+    text-decoration: none;
+    transition: 800ms;
+    color: #2B2B2B;
+}
+
+/* == STRUKTUR == */
+section {
+    min-height: 40vh;
+}
+
+.textbox {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(195, 195, 195, 0.74));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 5px rgba(0, 0, 0, 0.37);
+}
+
+h1 {
+    color: var(--polly_accent_yellow);
+}
+
+/* == ALLGEMEIN == */
+
+header {
+    display: flex;
+    flex-direction: row;
+    font-weight: 700;
+    height: 20%;
+    width: 98%;
+    padding: 2% 0% 2% 2%;
+    color: var(--polly_accent_yellow);
+}
+
+header img {
+    width: 7.5%;
+    height: auto;
+}
+
+header p {
+    display: flex;
+    align-items: center;
+    margin-left: .25em;
+    font-size: 2em;
+}
+
+header #login {
+    width: 100%;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-end;
+    padding-right: 2%;
+}
+
+header #login a {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    padding: 2%;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around ;
+    align-items: center;
+    width: 70%;
+    height: 10vh;
+    padding: 0 15% 0;
+    background-color: rgba(96, 96, 96, .4);
+    box-shadow: 0px 4px 10px 1px #050505;
+    font-weight: 700;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+}
+
+/* == VP1 == */
+#vp-one {
+    margin: 5% 0 10% 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+#vp-one .textbox {
+    width: 45%;
+    height: 40%;
+    padding: 1.5em;
+}
+
+#vp-one .textbox h1 {
+    padding: 0 1.5em 0;
+}
+
+#vp-one .textbox p {
+    padding: 0 2.5em 1em;
+}
+
+#vp-one #desktop-mockup {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: flex-end;
+    padding-top: 10%;
+}
+
+#vp-one #desktop-mockup img {
+    width: auto;
+    height: 65vh;
+}
+
+/* == VP2 == */
+#vp-two {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+#vp-two #iphone-mockup {
+    width: 45%;
+    display:flex;
+    justify-content: center;
+    margin-bottom: -7.5em;
+}
+
+#vp-two #iphone-mockup img {
+    width: auto;
+    height: 100%;
+}
+
+#vp-two div {
+    width: 55%;
+}
+#vp-two div .textbox {
+    width: 80%;
+    margin-top: 2em;
+    padding: 2em;
+}
+
+/* == HAPPY FLOW == */
+
+#happy-flow  {
+    width: 100%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#happy-flow iframe {
+    width: 60%;
+    height: 80vh;
+    margin-top: 5em;
+    margin-bottom: 5em;
+}
+
+/* == PRICING == */
+#pricing {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#pricing .pricing-container {
+    width: 27.5vw;
+    height: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#pricing .pricing-container i {
+    font-size: 2rem;
+    color: var(--polly_accent_yellow);
+    margin-top: 12.5%;
+    align-self: center;
+}
+
+#pricing .pricing-container h1 {
+    font-size: 2.5em;
+    margin-top: 4%;
+    align-self: center;
+}
+
+#pricing .pricing-container p {
+    text-align: left;
+    margin-left: 2em;
+}
+
+#pricing .pricing-container a {
+    align-self: center;
+    margin-top: 12.5%;
+    padding: 4% 25%;
+    background-color: var(--polly_accent_yellow);
+    border-radius: 25px;
+    font-weight: 700;
+    margin-top: auto;
+    margin-bottom: 2em;
+}
+#pricing .pricing-container a:link {
+    color: #2B2B2B;
+    transition: 800ms;
+}
+#pricing .pricing-container a:visited {
+    color: #2B2B2B;
+    transition: 800ms;
+}
+#pricing .pricing-container a:hover {
+    color: var(--polly_accent_yellow);
+    background-color: #2B2B2B;
+    transition: 200ms;
+}
+#pricing .pricing-container a:active {
+    color: var(--text_light_background);
+    transition: 800ms;
+}
+
+/* == CTA == */
+#cta {
+    width: 100%;
+    height: 80vh;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;    
+}
+
+
+/* == IMPRINT == */
+footer {
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(96, 96, 96, .4);
+}
+
+footer #imprint {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 5%;
+    justify-content: center;
+}
+
+footer #copyright {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    text-align: right;
+    padding-right: 5%;
+}
+
+footer #imprint a:first-of-type {
+    padding-bottom: 1em;
+}
