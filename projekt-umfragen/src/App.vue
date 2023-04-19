@@ -1,7 +1,6 @@
-
 <template>
   <main class="app">
-    <h1>Die Umfrage</h1>
+    <h1>Umfrage Kundenzufriedenheit</h1>
     <section class="quiz" v-if="!quizCompleted">
       <div class = "quiz-info">
         <span class="question">
@@ -44,10 +43,19 @@
 			</button>
       <!-- <h3>{{ getCurrentQuestion.selected }}</h3> -->
     </section>
-
     <section v-else>
 			<h2>Die Umfrage wurde beendet!</h2>
-      
+
+      <!-- Ende und Auswertung der Umfrage -->
+      <button
+      @click="umfrageAuswerten()"
+        > 
+        {{ 
+          'Umfrage auswerten'
+        }}
+      </button>
+      <div id = "auswertung">
+      </div>
 		</section>
   </main>
 </template>
@@ -68,16 +76,13 @@
 <script setup>
   import { ref, computed, onMounted, resolveDirective } from 'vue'
   import {collection, onSnapshot, doc, updateDoc, FieldValue, arrayUnion, getFirestore} from 'firebase/firestore';
-  import * as firebase from 'firebase/app'
 
   import { db } from '@/firebase'
-  import path from 'path';
   const questions = ref([{}])
   const umfragenCollectionRef = collection(db,'Umfragen')
   const quizCompleted = ref(false)
   const currentQuestion = ref(0)
   
-
   onMounted(() => {
     onSnapshot(umfragenCollectionRef, (querySnapshot) => {
     const fbQuestions = []
@@ -89,11 +94,7 @@
           selected: doc.data().selected,
           selectedLocal: null
         }
-
-
         frage.selected.push(null)
-        
-
         fbQuestions.push(frage)
       })
     questions.value = fbQuestions
@@ -110,7 +111,6 @@
     //e.target.value müsste die Option sein, welche man anklickt
   }
 
-  
    async function setSelected (id, auswahl, selectedArray) {
     //Aktualisieren des zwischengespeicherten Arrays mit neuem Wert 
     selectedArray[selectedArray.length - 1] = auswahl
@@ -126,5 +126,54 @@
     }
     
     quizCompleted.value = true
+  }
+
+  const countAnswers = () => {
+    let len = getCurrentQuestion.value.options.length
+    let len2 = getCurrentQuestion.value.selected.length
+    let arr = new Array(len)
+    for(let x = 0; x < len; x++){
+      let count = 0
+      for (let i = 0; i < len2; i++) {
+        if(getCurrentQuestion.value.selected[i] === x.toString()){
+          count++
+        } 
+      }
+      arr[x] = count
+    }
+    return arr
+  }
+
+  const umfrageAuswerten = () => {
+    currentQuestion.value = 0
+    let anzahlFragen = questions.value.length
+    let ergebnis = []
+    let ausgabe = ""
+    for(let x = 0; x < anzahlFragen; x++){
+      let antworten = countAnswers()
+      /*
+      Hier wird jedes Mal eine Kopie des antworten-Arrays erstellt und in das ergebnis-Array eingefügt, indem der spread-Operator ... verwendet wird. 
+      Dadurch erhältst du ein verschachteltes Array, wie du es erwartet hast.
+      */
+      ergebnis.push([...antworten])
+      ausgabe = ausgabe + " <br> <br> Frage " + (x+1) + ": "+  getCurrentQuestion.value.question + "<br>Auswahlmöglichkeiten: "
+      for(let z = 0; z < getCurrentQuestion.value.options.length; z++){
+        ausgabe = ausgabe + "<br>" +  getCurrentQuestion.value.options[z] + ", Anzahl ausgewählt: " + ergebnis[x][z]
+      }
+
+      document.getElementById('auswertung').innerHTML = JSON.stringify(ausgabe)
+      NextQuestion()
+    }
+
+    currentQuestion.value = 0
+
+    
+    console.log("Ergebnis: ", ergebnis)
+    /*
+    document.getElementById('auswertung').innerHTML = JSON.stringify("Frage 2: " +  getCurrentQuestion.value.question + " Auswahlmöglichkeiten: " + 
+    getCurrentQuestion.value.options[0] +  getCurrentQuestion.value.options[1] + getCurrentQuestion.value.options[2] + 
+    + "Ergebnisse: " + ergebnis[1])
+    */
+    return ergebnis
   }
 </script>
