@@ -7,6 +7,10 @@
             <router-link to="/" id="home-button"><i class="fa-solid fa-house"></i></router-link>
             <router-link to="/beantworten">Mein Konto</router-link>
             <router-link to="/register">Login</router-link>
+
+            <router-link v-if="true" to="/umfrageErstellen">Neue Umfrage</router-link>
+            <router-link v-if="true" to="/umfragenÜbersicht">Umfragen einsehen</router-link>
+
         </div>
     </div>
 

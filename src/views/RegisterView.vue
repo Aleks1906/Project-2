@@ -32,7 +32,6 @@ export default {
     },
     methods: {
       signUp() {
-      console.log("2")
       const auth = getAuth(app);
       createUserWithEmailAndPassword(auth, this.register.email, this.register.password)
       .then(userCredential => {

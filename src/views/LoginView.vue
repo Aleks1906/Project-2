@@ -17,8 +17,36 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import  { app } from '@/firebase'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-const isAdmin = false
+import { mapMutations } from 'vuex';
 
+export default {
+  data() {
+    return {
+      login: {
+        email: '',
+        password: '',
+      },
+    };
+  },
+  methods: {
+    ...mapMutations(['setAdmin']),
+    signIn() {
+      const auth = getAuth(app);
+      signInWithEmailAndPassword(auth, this.login.email, this.login.password)
+        .then((user) => {
+          console.log(user + 'Erfolgreich angemeldet!');
+          this.$router.push('/');
+          // Erfolgreich angemeldet
+        })
+        .catch((error) => {
+          console.log(error.message + 'Fehler!');
+          // Anmeldung fehlgeschlagen
+        });
+    },
+  },
+};
+
+/*
 export default {
   data() {
     return {
@@ -34,15 +62,16 @@ export default {
         signInWithEmailAndPassword(auth, this.login.email, this.login.password)
         .then(user => {
         console.log(user + "Erfolgreich angemeldet!");
-        isAdmin = true
+        this.$router.push("/");
         // Erfolgreich angemeldet
         })
         .catch(error => {
         console.log(error.message + "Fehler!");
         // Anmeldung fehlgeschlagen
       });
+      console.log("Admin nachdem es eigerntlich true sein sollte " + get)
     }
-    /*
+    
     signIn() {
       firebase.auth().signInWithEmailAndPassword(this.login.email, this.login.password)
         .then(user => {
@@ -53,9 +82,10 @@ export default {
           console.log(error.message + "Fehler!");
           // Anmeldung fehlgeschlagen
         });
-    } */
+    } 
   }
 }
+*/
 </script>
 
 <style>
