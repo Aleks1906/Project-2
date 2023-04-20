@@ -17,7 +17,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import  { app } from '@/firebase'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { mapMutations } from 'vuex';
+let isAdmin = false
 
 export default {
   data() {
@@ -29,13 +29,14 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['setAdmin']),
     signIn() {
       const auth = getAuth(app);
       signInWithEmailAndPassword(auth, this.login.email, this.login.password)
         .then((user) => {
           console.log(user + 'Erfolgreich angemeldet!');
           this.$router.push('/');
+          localStorage.setItem('isAdmin', true);
+          console.log(localStorage.getItem('isAdmin'))
           // Erfolgreich angemeldet
         })
         .catch((error) => {
@@ -45,47 +46,11 @@ export default {
     },
   },
 };
-
-/*
-export default {
-  data() {
-    return {
-      login: {
-        email: '',
-        password: ''
-      }
-    }
-  },
-  methods: {
-    signIn() {
-        const auth = getAuth(app);
-        signInWithEmailAndPassword(auth, this.login.email, this.login.password)
-        .then(user => {
-        console.log(user + "Erfolgreich angemeldet!");
-        this.$router.push("/");
-        // Erfolgreich angemeldet
-        })
-        .catch(error => {
-        console.log(error.message + "Fehler!");
-        // Anmeldung fehlgeschlagen
-      });
-      console.log("Admin nachdem es eigerntlich true sein sollte " + get)
-    }
-    
-    signIn() {
-      firebase.auth().signInWithEmailAndPassword(this.login.email, this.login.password)
-        .then(user => {
-          console.log(user + "Erfolgreich angemeldet!");
-          // Erfolgreich angemeldet
-        })
-        .catch(error => {
-          console.log(error.message + "Fehler!");
-          // Anmeldung fehlgeschlagen
-        });
-    } 
-  }
+export {
+  isAdmin
 }
-*/
+
+
 </script>
 
 <style>

@@ -6,10 +6,11 @@
         <div id="login">
             <router-link to="/" id="home-button"><i class="fa-solid fa-house"></i></router-link>
             <router-link to="/beantworten">Mein Konto</router-link>
-            <router-link to="/register">Login</router-link>
+            <router-link v-if="!isAdmin" to="/register">Login</router-link>
+            <router-link v-if="isAdmin"  to="/" @click = logout() >Logout</router-link>
 
-            <router-link v-if="true" to="/umfrageErstellen">Neue Umfrage</router-link>
-            <router-link v-if="true" to="/umfragenÜbersicht">Umfragen einsehen</router-link>
+            <router-link v-if="isAdmin" to="/umfrageErstellen">Neue Umfrage</router-link>
+            <router-link v-if="isAdmin" to="/umfragenÜbersicht">Umfragen einsehen</router-link>
 
         </div>
     </div>
@@ -17,9 +18,25 @@
 </template>
 
 <script>
+/*
+import isAdmin from '../views/LoginView.vue'
+console.log("Log von Nav: " + isAdmin.value)
+*/
+console.log("Von Nav: " + localStorage.getItem('isAdmin'))
 export default {
   name: 'HeaderView',
-  components: 'HeaderView'
+  components: 'HeaderView',
+  computed: {
+    isAdmin() {
+      return localStorage.getItem('isAdmin') === 'true';
+    },
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('isAdmin');
+      //this.$router.push('/login');
+    },
+  },
 }
 </script>
 
