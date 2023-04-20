@@ -1,4 +1,6 @@
+<!-- eslint-disable -->
 <template>
+  <!-- eslint-disable -->
   <NavView></NavView>
   <router-view/>
   <FooterView></FooterView>
@@ -16,7 +18,6 @@ export default {
   }
 }
 </script>
-
 <style>
 /* Import von Fontawesome für Icons */ 
 @import "~@fortawesome/fontawesome-free/css/all.css";

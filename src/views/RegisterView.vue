@@ -17,6 +17,9 @@
 <script>
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import  { app } from '@/firebase'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 
 export default {
     data() {
@@ -29,6 +32,23 @@ export default {
     },
     methods: {
       signUp() {
+      console.log("2")
+      const auth = getAuth(app);
+      createUserWithEmailAndPassword(auth, this.register.email, this.register.password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        console.log(user);
+
+        // Erfolgreich registriert
+      })
+      .catch(error => {
+        console.log(error.message);
+        // Registrierung fehlgeschlagen
+      });
+     } 
+      /*
+      signUp() {
+        console.log("2")
         firebase.auth().createUserWithEmailAndPassword(this.register.email, this.register.password)
           .then(user => {
             console.log(user);
@@ -39,7 +59,7 @@ export default {
             console.log(error.message);
             // Registrierung fehlgeschlagen
           });
-      }
+      } */
     }
 }
 </script>

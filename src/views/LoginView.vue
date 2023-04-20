@@ -12,10 +12,12 @@
   </div>
   </template>
 
-  <script>
+<script>
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import  { app } from '@/firebase'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+const isAdmin = false
 
 export default {
   data() {
@@ -28,16 +30,30 @@ export default {
   },
   methods: {
     signIn() {
+        const auth = getAuth(app);
+        signInWithEmailAndPassword(auth, this.login.email, this.login.password)
+        .then(user => {
+        console.log(user + "Erfolgreich angemeldet!");
+        isAdmin = true
+        // Erfolgreich angemeldet
+        })
+        .catch(error => {
+        console.log(error.message + "Fehler!");
+        // Anmeldung fehlgeschlagen
+      });
+    }
+    /*
+    signIn() {
       firebase.auth().signInWithEmailAndPassword(this.login.email, this.login.password)
         .then(user => {
-          console.log(user);
+          console.log(user + "Erfolgreich angemeldet!");
           // Erfolgreich angemeldet
         })
         .catch(error => {
-          console.log(error.message);
+          console.log(error.message + "Fehler!");
           // Anmeldung fehlgeschlagen
         });
-    }
+    } */
   }
 }
 </script>

@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/require-v-for-key -->
 <template>
     <main class="app">
       <h1>Umfrage Kundenzufriedenheit</h1>
@@ -8,7 +7,7 @@
              {{ getCurrentQuestion.question }} 
           </span>
           <div class="options">
-            // eslint-disable-next-line vue/require-v-for-key
+            
             <label 
                       v-for="(option, index) in getCurrentQuestion.options" 
                       :for="'option' + index" 
