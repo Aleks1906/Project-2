@@ -34,9 +34,10 @@ export default {
       signInWithEmailAndPassword(auth, this.login.email, this.login.password)
         .then((user) => {
           console.log(user + 'Erfolgreich angemeldet!');
+          sessionStorage.setItem('isAdmin', true);
+          //location.reload();
+          console.log(sessionStorage.getItem('isAdmin'))
           this.$router.push('/');
-          localStorage.setItem('isAdmin', true);
-          console.log(localStorage.getItem('isAdmin'))
           // Erfolgreich angemeldet
         })
         .catch((error) => {

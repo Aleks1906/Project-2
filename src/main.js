@@ -95,8 +95,8 @@ createApp(App)
             },
             
         },
-    },
-})
+    }, 
 
+})
 
 .mount('#app');

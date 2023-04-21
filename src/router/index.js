@@ -22,7 +22,10 @@ const routes = [
   {
     path: '/beantworten',
     name: 'beantworten',
-    component: BeantwortenView
+    component: BeantwortenView,
+    meta: {
+      reload: true,
+    },
   },
   {
     path: '/login',

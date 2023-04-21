@@ -1,7 +1,7 @@
 <!-- eslint-disable -->
 <template>
   <!-- eslint-disable -->
-  <NavView></NavView>
+  <NavView :key="$route.fullPath"></NavView>
   <router-view/>
   <FooterView></FooterView>
 </template>

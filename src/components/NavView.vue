@@ -5,7 +5,7 @@
 
         <div id="login">
             <router-link to="/" id="home-button"><i class="fa-solid fa-house"></i></router-link>
-            <router-link to="/beantworten">Mein Konto</router-link>
+            <router-link to="/beantworten">Teilnehmen</router-link>
             <router-link v-if="!isAdmin" to="/register">Login</router-link>
             <router-link v-if="isAdmin"  to="/" @click = logout() >Logout</router-link>
 
@@ -18,26 +18,22 @@
 </template>
 
 <script>
-/*
-import isAdmin from '../views/LoginView.vue'
-console.log("Log von Nav: " + isAdmin.value)
-*/
-console.log("Von Nav: " + localStorage.getItem('isAdmin'))
 export default {
   name: 'HeaderView',
   components: 'HeaderView',
   computed: {
     isAdmin() {
-      return localStorage.getItem('isAdmin') === 'true';
+      return sessionStorage.getItem('isAdmin') === 'true';
     },
   },
   methods: {
     logout() {
-      localStorage.removeItem('isAdmin');
-      //this.$router.push('/login');
+      sessionStorage.removeItem('isAdmin');
+      location.reload()
     },
+    
   },
-}
+} 
 </script>
 
 
