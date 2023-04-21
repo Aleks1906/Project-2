@@ -1,11 +1,12 @@
 <template>
     <div>
-        Derzeit laufende Umfragen, welche von {{ nameUserLaden() }} erstellt wurden:
+        Derzeit laufende Umfragen, welche von {{ nameUserLaden() }} erstellt wurden: 
     </div>
 
     <button @click="namenAnzeigen()">Namen anzeigen</button>
-
-    <div id="übersicht"></div>
+    
+    <div id="übersicht">
+    </div>
 </template>
 
 <script setup>
@@ -38,7 +39,7 @@
     })
 
     const namenAnzeigen = () => {
-        let ausgabe = 'Test'
+        let ausgabe = ''
         if(umfragenNamen.value.length != undefined){
             console.log("namenAnzeigen aufgerufen" + umfragenNamen.value)
             for (let x = 0; x < umfragenNamen.value.length; x++) {
@@ -46,7 +47,7 @@
             ausgabe = ausgabe + '<br>' + umfragenNamen.value[x]
             }
         } else {
-            console.log("Fehler")
+            ausgabe = "Noch keine Umfragen vorhanden"
         }
         document.getElementById('übersicht').innerHTML = ausgabe
     }
