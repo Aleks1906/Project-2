@@ -1,3 +1,6 @@
+<!-- Hier müsste es zunächst eine Übersicht mit momentan laufenden Umfragen geben -> Aus dieser Auswal
+    müsste man sich dann eine auswählen können an der man teilnehmen möchte-->
+
 <template>
     <main class="app">
       <h1>Umfrage Kundenzufriedenheit</h1>
@@ -47,7 +50,7 @@
       <section v-else>
               <h2>Die Umfrage wurde beendet!</h2>
   
-        <!-- Ende und Auswertung der Umfrage -->
+        <!-- Ende und Auswertung der Umfrage, muss eigene Datei UmfragenAuswerten.vue -->
         <button
         @click="umfrageAuswerten()"
           > 
@@ -80,7 +83,9 @@
   
     import { db } from '@/firebase'
     const questions = ref([{}])
-    const umfragenCollectionRef = collection(db,'Umfragen')
+    const umfragenCollectionRef = collection(db,'AlleUmfragen', 'Joshua.hoehn@posteo.de', 'Umfragen', 'Umfrage zur Kundenzufriedenheit', 'Fragen')
+    //Wie greife ich auf EMailAdmin zu als normaler User?
+    //Wie greife ich auf Umfrage zur Kundenzufriedenheit zu?
     const quizCompleted = ref(false)
     const currentQuestion = ref(0)
     
@@ -128,7 +133,8 @@
       
       quizCompleted.value = true
     }
-  
+
+  //Die Methoden ab hier müssten in die eigene Datei UmfragenAuswerten.vue
     const countAnswers = () => {
       let len = getCurrentQuestion.value.options.length
       let len2 = getCurrentQuestion.value.selected.length
@@ -154,7 +160,7 @@
         let antworten = countAnswers()
         /*
         Hier wird jedes Mal eine Kopie des antworten-Arrays erstellt und in das ergebnis-Array eingefügt, indem der spread-Operator ... verwendet wird. 
-        Dadurch erhältst du ein verschachteltes Array, wie du es erwartet hast.
+        Dadurch erhältst du ein verschachteltes Array.
         */
         ergebnis.push([...antworten])
         ausgabe = ausgabe + " <br> <br> Frage " + (x+1) + ": "+  getCurrentQuestion.value.question + "<br>Auswahlmöglichkeiten: "
@@ -165,16 +171,8 @@
         document.getElementById('auswertung').innerHTML = JSON.stringify(ausgabe)
         NextQuestion()
       }
-  
       currentQuestion.value = 0
-  
-      
       console.log("Ergebnis: ", ergebnis)
-      /*
-      document.getElementById('auswertung').innerHTML = JSON.stringify("Frage 2: " +  getCurrentQuestion.value.question + " Auswahlmöglichkeiten: " + 
-      getCurrentQuestion.value.options[0] +  getCurrentQuestion.value.options[1] + getCurrentQuestion.value.options[2] + 
-      + "Ergebnisse: " + ergebnis[1])
-      */
       return ergebnis
     }
   </script>

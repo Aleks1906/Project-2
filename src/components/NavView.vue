@@ -5,11 +5,11 @@
 
         <div id="login">
             <router-link to="/" id="home-button"><i class="fa-solid fa-house"></i></router-link>
-            <router-link to="/beantworten">Teilnehmen</router-link>
-            <router-link v-if="!isAdmin" to="/register">Login</router-link>
+            <router-link to="/umfragenÜbersichtUser">An Umfragen teilnehmen</router-link>
+            <router-link v-if="!isAdmin" to="/login">Login</router-link>
             <router-link v-if="isAdmin"  to="/" @click = logout() >Logout</router-link>
 
-            <router-link v-if="isAdmin" to="/umfrageErstellen">Neue Umfrage</router-link>
+            <router-link v-if="isAdmin" to="/umfragenErstellen">Neue Umfrage</router-link>
             <router-link v-if="isAdmin" to="/umfragenÜbersicht">Umfragen einsehen</router-link>
 
         </div>
@@ -29,6 +29,7 @@ export default {
   methods: {
     logout() {
       sessionStorage.removeItem('isAdmin');
+      sessionStorage.removeItem('EMailAdmin');
       location.reload()
     },
     

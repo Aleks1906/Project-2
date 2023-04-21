@@ -18,7 +18,7 @@ import 'firebase/auth';
 import  { app } from '@/firebase'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 let isAdmin = false
-
+let EMailAdmin = ""
 export default {
   data() {
     return {
@@ -33,9 +33,9 @@ export default {
       const auth = getAuth(app);
       signInWithEmailAndPassword(auth, this.login.email, this.login.password)
         .then((user) => {
-          console.log(user + 'Erfolgreich angemeldet!');
           sessionStorage.setItem('isAdmin', true);
-          //location.reload();
+          sessionStorage.setItem('EMailAdmin', this.login.email);
+          console.log(sessionStorage.getItem('EMailAdmin') + " wurde erfolgreich angemeldet!")
           console.log(sessionStorage.getItem('isAdmin'))
           this.$router.push('/');
           // Erfolgreich angemeldet
@@ -47,9 +47,7 @@ export default {
     },
   },
 };
-export {
-  isAdmin
-}
+
 
 
 </script>

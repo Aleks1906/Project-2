@@ -6,7 +6,7 @@ import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import UmfragenErstellen from '../views/UmfragenErstellen.vue'
 import UmfragenÜbersicht from '../views/UmfragenÜbersicht.vue'
-
+import UmfragenÜbersichtUser from '../views/UmfragenÜbersichtUser.vue'
 
 const routes = [
   {
@@ -38,9 +38,14 @@ const routes = [
     component: RegisterView
   },
   {
-    path: '/umfrageErstellen',
-    name: 'umfrageErstellen',
-    component: UmfragenErstellen
+    path: '/umfragenErstellen',
+    name: 'umfragenErstellen',
+    component: UmfragenErstellen //wieso nicht grün???!!!! Funktioniert sogar alles^^
+  },
+  {
+    path: '/umfragenÜbersichtUser',
+    name: 'umfragenÜbersichtUser',
+    component: UmfragenÜbersichtUser
   },
   {
     path: '/umfragenÜbersicht',
