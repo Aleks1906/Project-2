@@ -99,11 +99,11 @@ export default {
     margin-bottom: 2em;
     width: 45%;
     height: 3vh;
+    padding-left: 15px;
+
 }
 
-#register-container form input::placeholder {
-    padding-left: 1.5em;
-}
+
 
 #register-container form button {
   width: 45%;

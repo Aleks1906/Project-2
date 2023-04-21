@@ -90,10 +90,7 @@ export {
   margin-bottom: 2em;
   width: 45%;
   height: 3vh;
-}
-
-#login-container form input::placeholder {
-  padding-left: 1.5em;
+  padding-left: 15px;
 }
 
 #login-container form button {

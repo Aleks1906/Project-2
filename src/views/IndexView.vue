@@ -104,7 +104,6 @@ nav {
     flex-direction: row;
     justify-content: space-around ;
     align-items: center;
-    width: 70%;
     height: 10vh;
     padding: 0 15% 0;
     /* background-color: rgba(96, 96, 96, .4);
