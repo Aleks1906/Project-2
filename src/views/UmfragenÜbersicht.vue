@@ -10,7 +10,7 @@
 
 <script setup>
     import { ref, computed, onMounted, resolveDirective } from 'vue'
-    import {collection, onSnapshot, doc, updateDoc, FieldValue, arrayUnion, getFirestore} from 'firebase/firestore';
+    import {collection, onSnapshot, doc, updateDoc, FieldValue, arrayUnion, getFirestore, QuerySnapshot} from 'firebase/firestore';
     import { db } from '@/firebase'
     const nameUserLaden = () => {
         username = sessionStorage.getItem('EMailAdmin')
@@ -25,8 +25,8 @@
     let namen = []
  
     onMounted(() => {
-        console.log("EMail des Admins: " + sessionStorage.getItem('EMailAdmin'))
         onSnapshot(umfragenCollectionRef, (querySnapshot) => {
+            console.log("UmfragenCollectionRef: " + umfragenCollectionRef.path)
             console.log("Komme ich hierhin?!")
             querySnapshot.forEach((doc) => {
                 namen.push(doc.id)
