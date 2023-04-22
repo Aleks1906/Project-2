@@ -17,8 +17,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import  { app } from '@/firebase'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-let isAdmin = false
-let EMailAdmin = ""
+
 export default {
   data() {
     return {

@@ -7,6 +7,8 @@ import RegisterView from '../views/RegisterView.vue'
 import UmfragenErstellen from '../views/UmfragenErstellen.vue'
 import UmfragenÜbersicht from '../views/UmfragenÜbersicht.vue'
 import UmfragenÜbersichtUser from '../views/UmfragenÜbersichtUser.vue'
+import UmfragenDetailÜbersicht from '../views/UmfragenDetailÜbersicht.vue'
+import FragenErstellen from '../views/FragenErstellen.vue'
 
 const routes = [
   {
@@ -46,6 +48,16 @@ const routes = [
     path: '/umfragenÜbersichtUser',
     name: 'umfragenÜbersichtUser',
     component: UmfragenÜbersichtUser
+  },
+  {
+    path: '/umfragenDetailÜbersicht',
+    name: 'umfragenDetailÜbersicht',
+    component: UmfragenDetailÜbersicht
+  },
+  {
+    path: '/fragenErstellen',
+    name: 'fragenErstellen',
+    component: FragenErstellen
   },
   {
     path: '/umfragenÜbersicht',
