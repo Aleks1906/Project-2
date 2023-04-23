@@ -35,9 +35,10 @@
       const umfrageDocRef = doc(umfragenCollectionRef, sessionStorage.getItem('umfragenName'))
       const fragenCollectionRef = collection(umfrageDocRef, 'Fragen')
       console.log("FragenCollectionRef: " + fragenCollectionRef)
+      const optionsArray = frageAntwortoptionen.value.split(';').map(option => option.trim());
       await addDoc(fragenCollectionRef, {
         question: frageFragestellung.value,
-        options: frageAntwortoptionen.value,
+        options: optionsArray,
         selected: []
       })
     } catch (error) {
