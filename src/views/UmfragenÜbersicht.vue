@@ -4,7 +4,7 @@
     </div>
 
     <div v-for="umfrage in umfragenNamen">
-            <button @click="this.$router.push('/beantworten')"> 
+            <button @click="writeToSessionStorage(umfrage), this.$router.push('/umfragenDetailÜbersicht')"> 
                 {{ umfrage }}
              </button>
     </div>
@@ -56,4 +56,8 @@
         })
         //return ausgabe
     })
+
+    const writeToSessionStorage = (umfrage, admin) => {
+        sessionStorage.setItem('umfrageAuswerten', umfrage);
+    }
 </script>

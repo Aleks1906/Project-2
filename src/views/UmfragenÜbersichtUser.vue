@@ -1,15 +1,15 @@
 <template>
     <h1>Übersicht aller Umfragen</h1>
     <div v-for="(umfragenarray, index) in umfragen" :key="index">
-      <div v-for="(umfrage, idx) in umfragenarray" :key="idx">
-        <button @click="this.$router.push('/beantworten')">
-          {{ umfrage }}
+      <div v-for="(umfrage) in umfragenarray" >
+        <button @click="writeToSessionStorage(umfrage, hilfeAdmins[index][0]), this.$router.push('/beantworten')">
+          {{ umfrage }} - {{ hilfeAdmins[index][0]}}
+          <!-- irgendwie müssen wir hier diese beiden Werte mitgeben, damit bei der Beantwortung die richtige Route ausgewählt wird.-->
         </button>
       </div>
     </div>
-  </template>
+</template>
   
-
 <script setup>
     import { ref, computed, onMounted, resolveDirective } from 'vue'
     import {collection, onSnapshot, doc, updateDoc, FieldValue, arrayUnion, getFirestore} from 'firebase/firestore';
@@ -18,32 +18,8 @@
     const umfragenCollectionRef = collection(db,'AlleUmfragen')
     const admins = ref([])
     const umfragen = ref([])
-/*
-    onMounted(() => {
-        onSnapshot(umfragenCollectionRef, (querySnapshot) => {
-            const allAdmins = []
-            const allSurveys = []
-            querySnapshot.forEach((doc) => {
-                console.log("All Aminds " + doc.id)
-                allAdmins.push(doc.id)
-                console.log( "allAdmins" + allAdmins)
-            })
-            admins.value = allAdmins
-            console.log("Admins.value " + admins.value)
-            admins.value.forEach((admin) => {
-                const adminCollectionRef = collection(db, 'AlleUmfragen', admin, 'Umfragen')
-                console.log("Admincollectionref " + adminCollectionRef)
-                onSnapshot(adminCollectionRef, (querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        allSurveys.push(doc.id)
-                    })
-                    console.log("allSurveys: " + allSurveys)
-                    umfragen.value = allSurveys
-                    console.log("umfragen.value: " + umfragen.value)
-                })
-            })
-        })
-    }) */
+    const hilfeAdmins = ref([])
+
     onMounted(() => {
     onSnapshot(umfragenCollectionRef, (querySnapshot) => {
       const allAdmins = []
@@ -60,15 +36,23 @@
         console.log("Admincollectionref " + adminCollectionRef)
         onSnapshot(adminCollectionRef, (querySnapshot) => {
           const surveys = []
+          const helper = []
           querySnapshot.forEach((doc) => {
             surveys.push(doc.id)
+            helper.push(admin)
           })
-          console.log("Umfragen von Admin " + index + ": " + surveys)
+          hilfeAdmins.value[index] = helper
           umfragen.value[index] = surveys
+          console.log("Hilfe Admins: " + hilfeAdmins.value)
           console.log("umfragen.value: " + umfragen.value)
+          console.log("Admins: " + admins.value)
         })
       })
     })
   })
 
+    const writeToSessionStorage = (umfrage, admin) => {
+        sessionStorage.setItem('umfrageBeantworten', umfrage);
+        sessionStorage.setItem('adminBeantworten', admin);
+    }
 </script>

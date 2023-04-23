@@ -1,6 +1,3 @@
-<!-- Hier müsste es zunächst eine Übersicht mit momentan laufenden Umfragen geben -> Aus dieser Auswal
-    müsste man sich dann eine auswählen können an der man teilnehmen möchte-->
-
 <template>
     <main class="app">
       <h1>Umfrage Kundenzufriedenheit</h1>
@@ -83,7 +80,7 @@
   
     import { db } from '@/firebase'
     const questions = ref([{}])
-    const umfragenCollectionRef = collection(db,'AlleUmfragen', 'Joshua.hoehn@posteo.de', 'Umfragen', 'Umfrage zur Kundenzufriedenheit', 'Fragen')
+    const umfragenCollectionRef = collection(db,'AlleUmfragen', sessionStorage.getItem('adminBeantworten'), 'Umfragen', sessionStorage.getItem('umfrageBeantworten'), 'Fragen')
     //Wie greife ich auf EMailAdmin zu als normaler User?
     //Wie greife ich auf Umfrage zur Kundenzufriedenheit zu?
     const quizCompleted = ref(false)
@@ -158,10 +155,6 @@
       let ausgabe = ""
       for(let x = 0; x < anzahlFragen; x++){
         let antworten = countAnswers()
-        /*
-        Hier wird jedes Mal eine Kopie des antworten-Arrays erstellt und in das ergebnis-Array eingefügt, indem der spread-Operator ... verwendet wird. 
-        Dadurch erhältst du ein verschachteltes Array.
-        */
         ergebnis.push([...antworten])
         ausgabe = ausgabe + " <br> <br> Frage " + (x+1) + ": "+  getCurrentQuestion.value.question + "<br>Auswahlmöglichkeiten: "
         for(let z = 0; z < getCurrentQuestion.value.options.length; z++){

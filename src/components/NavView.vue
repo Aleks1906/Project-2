@@ -4,7 +4,7 @@
         <p>Polly - Slogan</p>
 
         <div id="login">
-            <router-link to="/" id="home-button"><i class="fa-solid fa-house"></i></router-link>
+            <router-link to="/" id="home-button"></router-link>
             <router-link to="/umfragenÜbersichtUser">An Umfragen teilnehmen</router-link>
             <router-link v-if="!isAdmin" to="/login">Login</router-link>
             <router-link v-if="isAdmin"  to="/" @click = logout() >Logout</router-link>
