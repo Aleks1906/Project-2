@@ -3,20 +3,11 @@
         Derzeit laufende Umfragen, welche von {{ nameUserLaden() }} erstellt wurden: 
     </div>
 
-    <!-- <button @click="namenAnzeigen()">Namen anzeigen</button>-->
-    
-    <div id="übersicht">
-        {{ namenAnzeigen() }}
+    <div v-for="umfrage in umfragenNamen">
+            <button @click="this.$router.push('/beantworten')"> 
+                {{ umfrage }}
+             </button>
     </div>
-
-    <div>
-        <br>
-        <br>
-        <br><button @click="this.$router.push('/umfragenDetailÜbersicht')">Umfrage zur Kundenzufriedenheit</button>
-        <br><br>
-        <RouterLink to="/umfragenDetailÜbersicht" id="change-to-register">Umfrage zur Mitarbeiterzufriedenheit</RouterLink>
-    </div>
-
 </template>
 
 <script setup>
@@ -33,18 +24,17 @@
     const EMailAdmin = sessionStorage.getItem('EMailAdmin')
     const umfragenCollectionRef = collection(db,'AlleUmfragen', EMailAdmin, 'Umfragen')
     //const umfragenCollectionRef2 = collection('AlleUmfragen').doc(sessionStorage.getItem('EMailAdmin'))
-    let namen = []
 
-    const namenAnzeigen =  () => {
+    onMounted(() => {
          onSnapshot(umfragenCollectionRef, (querySnapshot) => {
-            console.log("UmfragenCollectionRef: " + umfragenCollectionRef.path)
+            const namen = []
             querySnapshot.forEach((doc) => {
                 namen.push(doc.id)
-                console.log("Was ist die doc.id: " + doc.id)
             })
-            console.log("onMounted aufgerufen?" + namen[0])
-            umfragenNamen.value.push(namen)
-            console.log("Wert von Umfragen Value: " + umfragenNamen.value)
+            umfragenNamen.value = namen
+            //console.log("onMounted aufgerufen?" + namen[0])
+            //umfragenNamen.value[index] = namen
+            //console.log("Wert von Umfragen Value: " + umfragenNamen.value)
             
             let ausgabe = ''
             if(namen.length != undefined){
@@ -61,9 +51,9 @@
             } else {
                 ausgabe = "Noch keine Umfragen vorhanden"
             }
-            document.getElementById('übersicht').innerHTML = ausgabe
+            //document.getElementById('übersicht').innerHTML = ausgabe
             console.log("Ausgabe: " +  ausgabe)
         })
         //return ausgabe
-    }
+    })
 </script>
