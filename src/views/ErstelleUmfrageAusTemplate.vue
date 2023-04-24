@@ -1,5 +1,6 @@
 <template>
-    <h1>Übersicht aller Templates</h1>
+  <div class="view-main-content">
+    <h1 class="view-main-content-heading">Übersicht aller Templates</h1>
     <div v-for="(template, index) in templates" :key="index">
         <h2>{{ template }} </h2> 
         <p>Dieses Template enthält folgende Fragen: </p>
@@ -14,6 +15,7 @@
         <br>
         ---------------------------------------------------------------------
     </div>
+  </div>
 </template>
   
 <script setup>

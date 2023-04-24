@@ -1,17 +1,27 @@
 <template>
-    <div>
-      <h1>Umfrage erstellen</h1>
+    <div class="view-main-content">
+      <h1 class="view-main-content-heading">Umfrage erstellen</h1>
       <form>
         <div>
-          <label for="umfrage-name">Name der Umfrage:</label>
-          <input type="text" id="umfrage-name" v-model="umfrageName" required>
+          <input type="text" id="umfrage-name" v-model="umfrageName" required placeholder="Gib der Umfrage einen Namen" class="view-main-content-textfield">
         </div>
         <br>
-        <button @click="this.$router.push('/fragenErstellen'), addUmfrage()">Fragen erstellen</button>
-        <button @click="this.$router.push('/erstelleUmfrageAusTemplate'), addUmfrage()">Erstelle aus einem Template</button>
+        <button @click="this.$router.push('/fragenErstellen'), addUmfrage()" class="view-main-content-advanceBtn">Fragen erstellen</button>
+        <button @click="this.$router.push('/erstelleUmfrageAusTemplate'), addUmfrage()" class="view-main-content-advanceBtn">Erstelle aus einem Template</button>
       </form>
     </div>
   </template>
+
+  <style scoped>
+    input {
+      min-width: 15vw;
+      margin-top: 1.5rem;
+    }
+
+    button:first-of-type {
+      margin-right: 2rem;
+    }
+  </style>
   
   <script setup>
 

@@ -1,13 +1,12 @@
 <template>
-    <main class="app">
-      <h1>Umfrage Kundenzufriedenheit</h1>
+    <main class="app view-main-content">
+      <h1 class="view-main-content-heading">Umfrage Kundenzufriedenheit</h1>
       <section class="quiz" v-if="!quizCompleted">
         <div class = "quiz-info">
           <span class="question">
              {{ getCurrentQuestion.question }} 
           </span>
           <div class="options">
-            
             <label 
                       v-for="(option, index) in getCurrentQuestion.options" 
                       :for="'option' + index" 
@@ -27,19 +26,19 @@
                           @change="SetAnswer" 
                       />
                       <span>{{ option }}</span>
-                  </label>
+            </label>
           </div>
         </div>
   
-        <button 
+        <button class="view-main-content-advanceBtn"
                   @click="setSelected(getCurrentQuestion.id, getCurrentQuestion.selectedLocal, getCurrentQuestion.selected), NextQuestion()" 
                   :disabled="getCurrentQuestion.selectedLocal == null">
                   {{ 
                       getCurrentQuestion.index == questions.length - 1 
-                          ? 'Finish' 
+                          ? 'Abschließen' 
                           : getCurrentQuestion.selectedLocal == null
-                              ? 'Select an option'
-                              : 'Next question'
+                              ? 'Bitte wähle eine Antwort'
+                              : 'Nächste Frage'
                   }}
               </button>
         <!-- <h3>{{ getCurrentQuestion.selected }}</h3> -->
@@ -62,17 +61,47 @@
     </main>
   </template>
   
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Monsterrat', sans-serif;
-    }
-    body {
-      background-color: #3d1771;
-      color: #FFF;
-    }
+  <style scoped>
+  .quiz {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quiz-info {
+    height: 60%;
+  }
+  .question {
+    font-size: 1.5rem;
+  }
+
+  .options {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .option {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .option input {
+    margin-right: 1rem;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  .option input[type="radio"]:checked {
+    accent-color: var(--polly_accent_yellow);
+  }
+  .quiz button {
+    width: 25%;
+  }
   </style>
   
   <script setup>

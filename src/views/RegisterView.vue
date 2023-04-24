@@ -8,8 +8,6 @@
                 <button type="button" @click="signUp">Registrieren</button>
                 <RouterLink to="/login" id="change-to-login">Hast du schon einen Account?</RouterLink>
             </form>
-            
-
         </div>
     </div>
 </template>
@@ -37,12 +35,15 @@ export default {
       .then(userCredential => {
         const user = userCredential.user;
         console.log(user);
-
+        alert("Die Registrierung war erfolgreich")
+        this.$router.push('/login');
         // Erfolgreich registriert
       })
       .catch(error => {
-        console.log(error.message);
         // Registrierung fehlgeschlagen
+        console.log(error.message);
+        alert("Die Registrierung war nicht erfolgreich: " + error.message)
+
       });
      } 
       /*
@@ -99,9 +100,6 @@ export default {
     margin-bottom: 2em;
     width: 45%;
     height: 3vh;
-}
-
-#register-container form input::placeholder {
     padding-left: 1.5em;
 }
 

@@ -1,7 +1,7 @@
 <template>
-    <div>
-      <h1>Übersicht aller Umfragen</h1>
-      <input type="text" v-model="searchQuery" placeholder="Umfrage suchen">
+    <div class="view-main-content">
+      <h1 class="view-main-content-heading">Übersicht aller Umfragen</h1>
+      <input type="text" v-model="searchQuery" placeholder="Umfragen durchsuchen" class="view-main-content-textfield">
       <div v-for="(umfragenarray, index) in filteredUmfragen" :key="index">
         <div v-for="(umfrage) in umfragenarray" >
           <button @click="writeToSessionStorage(umfrage, hilfeAdmins[index][0]), this.$router.push('/beantworten')">
@@ -11,6 +11,28 @@
       </div>
     </div>
   </template>
+
+  <style scoped>
+    button {
+      color: var(--text_dark_background);
+      font-weight: bold;
+      background: transparent;
+      border: 3px solid var(--text_dark_background);
+      cursor: pointer;
+      margin-bottom: 1em;
+      padding: .7rem 1rem;
+      border-radius: 10px;
+      transition: 500ms;
+    }
+
+    button:hover {
+      transform: scale(1.02);
+      transition: 300ms;
+      color: var(--polly_accent_yellow);
+    }
+
+
+  </style>
   
   <script setup>
   import { ref, computed, onMounted } from 'vue'

@@ -5,12 +5,12 @@
       <form>
         <input type="email" id="email" name="email" placeholder="E-Mail Adresse" v-model="login.email" required>
         <input type="password" id="password" name="password" placeholder="Passwort" v-model="login.password" required>
-        <button type="button" @click="signIn">Anmelden User</button>
+        <button type="button" @click="signIn">Anmelden</button>
         <RouterLink to="/register" id="change-to-register">Noch keinen Account?</RouterLink>
       </form>
     </div>
   </div>
-  </template>
+</template>
 
 <script>
 import firebase from 'firebase/app';
@@ -41,6 +41,7 @@ export default {
         })
         .catch((error) => {
           console.log(error.message + 'Fehler!');
+          alert("Es gab einen Fehler bei der Anmeldung: " + error.message);
           // Anmeldung fehlgeschlagen
         });
     },
@@ -87,9 +88,6 @@ export default {
   margin-bottom: 2em;
   width: 45%;
   height: 3vh;
-}
-
-#login-container form input::placeholder {
   padding-left: 1.5em;
 }
 

@@ -84,19 +84,6 @@ export default {
 </script>
 
 <style>
-/* == ScrollReveal with IntersectionObserver == */
-.hidden_show_left {
-    opacity: 0;
-    transition: all 500ms;
-    filter: blur(5px);
-    transform: translateX(-100%);
-}
-.hidden_show_right {
-    opacity: 0;
-    transition: all 500ms;
-    filter: blur(5px);
-    transform: translateX(100%);
-}
 
 /* == NAVIGATION == */
 nav {
@@ -104,11 +91,9 @@ nav {
     flex-direction: row;
     justify-content: space-around ;
     align-items: center;
-    width: 70%;
+    width: 100%;
     height: 10vh;
     padding: 0 15% 0;
-    /* background-color: rgba(96, 96, 96, .4);
-    box-shadow: 0px 4px 10px 1px #050505; */
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
     font-weight: 700;
@@ -186,7 +171,7 @@ nav {
 /* == HAPPY FLOW == */
 #happy-flow  {
     width: 100%;
-    background-color: red;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;

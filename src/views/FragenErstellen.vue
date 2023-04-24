@@ -1,23 +1,35 @@
 <template>
-      <div>
-    <h1>Fragen erstellen</h1>
-    <form>
-      <div>
-        <label for="fragestellung">Fragestellung:</label>
-        <input id="fragestellung" type="text" v-model="frageFragestellung" required>
-      </div>
-      <br>
-      <div>
-        <label for="antworten">Antwortoptionen:</label>
-        <input id="antworten" type="text" v-model="frageAntwortoptionen" required>
-      </div>
-      <br>
-      <button @click="addFrage()" :disabled="addingFrage">Frage hinzufügen</button>
-    </form>
+    <div class="view-main-content">
+      <h1 class="view-main-content-heading">Fragen erstellen</h1>
+      <form>
+        <div>
+          <input id="fragestellung" type="text" v-model="frageFragestellung" required placeholder="Frage" class="view-main-content-textfield">
+        </div>
+        
+        <div>
+          <input id="antworten" type="text" v-model="frageAntwortoptionen" required placeholder="Antwortoptionen" class="view-main-content-textfield">
+        </div>
+        <button @click="addFrage()" :disabled="addingFrage" class="view-main-content-advanceBtn">Frage hinzufügen</button>
+      </form>
 
-    <button  @click="this.$router.push('/umfrageWurdeErstellt'), sessionReset()">Fertig (SessionStorage löschen!)</button>
+      <button  @click="this.$router.push('/umfrageWurdeErstellt'), sessionReset()" class="view-main-content-advanceBtn">Fertig (SessionStorage löschen!)</button>
   </div>
 </template>
+
+<style scoped>
+  .view-main-content form {
+    display: flex;
+    flex-direction: column;
+    width: 35vw;
+  }
+
+  .view-main-content form input {
+    width: 100%;
+  }
+  .view-main-content .view-main-content-advanceBtn {
+    width: 15vw;
+  }
+</style>
 
 <script setup>
   import { ref, computed, onMounted, resolveDirective } from 'vue'

@@ -97,4 +97,47 @@ a:active {
   line-height: 1.5;
 }
 
+/* VIEW Specific CSS */
+
+.view-main-content {
+  width: 100%;
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 20%;
+}
+
+.view-main-content-heading {
+  margin-bottom: 1rem;
+  color: var(--polly_accent_yellow);
+}
+
+.view-main-content-textfield {
+  border: none;
+  padding: .7rem 1rem;
+  border-radius: 30px;
+  margin-bottom: 2rem;
+}
+
+.view-main-content-advanceBtn {
+  color: var(--text_dark_background);
+  font-weight: bold;
+  background: transparent;
+  border: 3px solid var(--text_dark_background);
+  cursor: pointer;
+  margin-bottom: 1em;
+  padding: .7rem 1rem;
+  border-radius: 30px;
+  transition: 500ms;
+}
+
+.view-main-content-advanceBtn:hover {
+  transform: scale(.98);
+  transition: 300ms;
+  color: var(--polly_accent_yellow);
+  border-color: var(--polly_accent_yellow);
+}
+
+
 </style>

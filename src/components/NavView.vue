@@ -4,7 +4,7 @@
         <p>Polly - Slogan</p>
 
         <div id="login">
-            <router-link to="/" id="home-button"></router-link>
+            <router-link to="/" id="home-button"><i class="fa-solid fa-house"></i></router-link>
             <router-link to="/umfragenÜbersichtUser">An Umfragen teilnehmen</router-link>
             <router-link v-if="!isAdmin" to="/login">Login</router-link>
             <router-link v-if="isAdmin"  to="/" @click = logout() >Logout</router-link>
@@ -30,6 +30,7 @@ export default {
     logout() {
       sessionStorage.removeItem('isAdmin');
       sessionStorage.removeItem('EMailAdmin');
+      alert("Du wurdest ausgeloggt.")
       location.reload()
       this.$router.push("/")
     },
@@ -45,7 +46,7 @@ export default {
         display: flex;
         flex-direction: row;
         font-weight: 700;
-        height: 20%;
+        height: 20vh;
         width: 98%;
         padding: 2% 0% 2% 2%;
         color: var(--polly_accent_yellow);
@@ -86,6 +87,7 @@ export default {
     #header #login #home-button {
         border: none;
         background: transparent;
+        margin-right: 2em;
     }
     #header #login #home-button:hover {
         border: none;
