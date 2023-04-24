@@ -2,9 +2,14 @@
     <button
     @click="umfrageAuswerten()"
         > 
+        {{getName()}}
         {{ 
-        'Umfrage auswerten'
+        ' auswerten'
         }}
+    </button>
+
+    <button @click="umfrageLöschen(), this.$router.push('/')">
+        {{getName()}} löschen
     </button>
 
     <div id = "auswertung">
@@ -26,11 +31,12 @@
   
   <script setup>
     import { ref, computed, onMounted, resolveDirective } from 'vue'
-    import {collection, onSnapshot, doc, updateDoc, FieldValue, arrayUnion, getFirestore} from 'firebase/firestore';
+    import {collection, onSnapshot, doc, deleteDoc, getDocs, updateDoc, FieldValue, arrayUnion, getFirestore} from 'firebase/firestore';
   
     import { db } from '@/firebase'
     const questions = ref([{}])
     const umfragenCollectionRef = collection(db,'AlleUmfragen', sessionStorage.getItem('EMailAdmin'), 'Umfragen', sessionStorage.getItem('umfrageAuswerten'), 'Fragen')
+    const deleteRef = doc(db,'AlleUmfragen', sessionStorage.getItem('EMailAdmin'), 'Umfragen', sessionStorage.getItem('umfrageAuswerten'))
     //Wie greife ich auf EMailAdmin zu als normaler User?
     //Wie greife ich auf Umfrage zur Kundenzufriedenheit zu?
     const quizCompleted = ref(false)
@@ -102,5 +108,16 @@
       currentQuestion.value = 0
       console.log("Ergebnis: ", ergebnis)
       return ausgabe
+    }
+
+    const getName = () => {
+        return sessionStorage.getItem('umfrageAuswerten')
+    }
+    const umfrageLöschen = async () => {
+        const questionSnapshot = await getDocs(umfragenCollectionRef);
+        questionSnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
+        const querySnapshot = await deleteDoc(deleteRef);
     }
   </script>

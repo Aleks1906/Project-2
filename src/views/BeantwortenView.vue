@@ -33,11 +33,11 @@
   
         <button 
                   @click="setSelected(getCurrentQuestion.id, getCurrentQuestion.selectedLocal, getCurrentQuestion.selected), NextQuestion()" 
-                  :disabled="!getCurrentQuestion.selected">
+                  :disabled="getCurrentQuestion.selectedLocal == null">
                   {{ 
                       getCurrentQuestion.index == questions.length - 1 
                           ? 'Finish' 
-                          : getCurrentQuestion.selected == null
+                          : getCurrentQuestion.selectedLocal == null
                               ? 'Select an option'
                               : 'Next question'
                   }}

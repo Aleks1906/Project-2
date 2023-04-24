@@ -1,26 +1,29 @@
 <template>
-    <h1>Übersicht aller Umfragen</h1>
-    <div v-for="(umfragenarray, index) in umfragen" :key="index">
-      <div v-for="(umfrage) in umfragenarray" >
-        <button @click="writeToSessionStorage(umfrage, hilfeAdmins[index][0]), this.$router.push('/beantworten')">
-          {{ umfrage }} - {{ hilfeAdmins[index][0]}}
-          <!-- irgendwie müssen wir hier diese beiden Werte mitgeben, damit bei der Beantwortung die richtige Route ausgewählt wird.-->
-        </button>
+    <div>
+      <h1>Übersicht aller Umfragen</h1>
+      <input type="text" v-model="searchQuery" placeholder="Umfrage suchen">
+      <div v-for="(umfragenarray, index) in filteredUmfragen" :key="index">
+        <div v-for="(umfrage) in umfragenarray" >
+          <button @click="writeToSessionStorage(umfrage, hilfeAdmins[index][0]), this.$router.push('/beantworten')">
+            {{ umfrage }} - {{ hilfeAdmins[index][0]}}
+          </button>
+        </div>
       </div>
     </div>
-</template>
+  </template>
   
-<script setup>
-    import { ref, computed, onMounted, resolveDirective } from 'vue'
-    import {collection, onSnapshot, doc, updateDoc, FieldValue, arrayUnion, getFirestore} from 'firebase/firestore';
-    import { db } from '@/firebase'
- 
-    const umfragenCollectionRef = collection(db,'AlleUmfragen')
-    const admins = ref([])
-    const umfragen = ref([])
-    const hilfeAdmins = ref([])
-
-    onMounted(() => {
+  <script setup>
+  import { ref, computed, onMounted } from 'vue'
+  import { collection, onSnapshot } from 'firebase/firestore'
+  import { db } from '@/firebase'
+  
+  const umfragenCollectionRef = collection(db,'AlleUmfragen')
+  const admins = ref([])
+  const umfragen = ref([])
+  const hilfeAdmins = ref([])
+  const searchQuery = ref('')
+  
+  onMounted(() => {
     onSnapshot(umfragenCollectionRef, (querySnapshot) => {
       const allAdmins = []
       const allSurveys = []
@@ -50,9 +53,24 @@
       })
     })
   })
-
-    const writeToSessionStorage = (umfrage, admin) => {
-        sessionStorage.setItem('umfrageBeantworten', umfrage);
-        sessionStorage.setItem('adminBeantworten', admin);
+  
+  const filteredUmfragen = computed(() => {
+    const query = searchQuery.value.toLowerCase()
+    if (query === '') {
+      return umfragen.value
+    } else {
+      return umfragen.value.map((umfragenarray) => {
+        return umfragenarray.filter((umfrage) => {
+          return umfrage.toLowerCase().includes(query)
+        })
+      })
     }
-</script>
+  })
+  
+  const writeToSessionStorage = (umfrage, admin) => {
+    sessionStorage.setItem('umfrageBeantworten', umfrage);
+    sessionStorage.setItem('adminBeantworten', admin);
+  }
+  
+  </script>
+  

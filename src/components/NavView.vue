@@ -31,6 +31,7 @@ export default {
       sessionStorage.removeItem('isAdmin');
       sessionStorage.removeItem('EMailAdmin');
       location.reload()
+      this.$router.push("/")
     },
     
   },
