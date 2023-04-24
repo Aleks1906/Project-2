@@ -47,7 +47,7 @@
       <section v-else>
               <h2>Die Umfrage wurde beendet!</h2>
   
-        <!-- Ende und Auswertung der Umfrage, muss eigene Datei UmfragenAuswerten.vue -->
+        <!-- Ende und Auswertung der Umfrage, muss eigene Datei UmfragenAuswerten.vue 
         <button
         @click="umfrageAuswerten()"
           > 
@@ -57,6 +57,7 @@
         </button>
         <div id = "auswertung">
         </div>
+        -->
           </section>
     </main>
   </template>

@@ -15,7 +15,7 @@
       <button @click="addFrage()" :disabled="addingFrage">Frage hinzufügen</button>
     </form>
 
-    <button  @click="this.$router.push('/'), sessionReset()">Fertig (SessionStorage löschen!)</button>
+    <button  @click="this.$router.push('/umfrageWurdeErstellt'), sessionReset()">Fertig (SessionStorage löschen!)</button>
   </div>
 </template>
 

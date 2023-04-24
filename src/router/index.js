@@ -9,6 +9,9 @@ import UmfragenÜbersicht from '../views/UmfragenÜbersicht.vue'
 import UmfragenÜbersichtUser from '../views/UmfragenÜbersichtUser.vue'
 import UmfragenDetailÜbersicht from '../views/UmfragenDetailÜbersicht.vue'
 import FragenErstellen from '../views/FragenErstellen.vue'
+import ErstelleUmfrageAusTemplate from '../views/ErstelleUmfrageAusTemplate.vue'
+import UmfrageWurdeErstellt from '../views/UmfrageWurdeErstellt.vue'
+
 
 const routes = [
   {
@@ -55,9 +58,19 @@ const routes = [
     component: UmfragenDetailÜbersicht
   },
   {
+    path: '/erstelleUmfrageAusTemplate',
+    name: 'erstelleUmfrageAusTemplate',
+    component: ErstelleUmfrageAusTemplate
+  },
+  {
     path: '/fragenErstellen',
     name: 'fragenErstellen',
     component: FragenErstellen
+  },
+  {
+    path: '/umfrageWurdeErstellt',
+    name: 'umfrageWurdeErstellt',
+    component: UmfrageWurdeErstellt
   },
   {
     path: '/umfragenÜbersicht',

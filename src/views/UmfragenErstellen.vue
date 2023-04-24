@@ -8,6 +8,7 @@
         </div>
         <br>
         <button @click="this.$router.push('/fragenErstellen'), addUmfrage()">Fragen erstellen</button>
+        <button @click="this.$router.push('/erstelleUmfrageAusTemplate'), addUmfrage()">Erstelle aus einem Template</button>
       </form>
     </div>
   </template>
