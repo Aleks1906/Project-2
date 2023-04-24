@@ -1,7 +1,7 @@
 <template>
     <div id="header">
         <img src="../views/media/img/logo_yellow.png" alt="">
-        <p>Polly - Slogan</p>
+        <p>Polly</p>
 
         <div id="login">
             <router-link to="/" id="home-button"><i class="fa-solid fa-house"></i></router-link>
@@ -50,11 +50,12 @@ export default {
         width: 98%;
         padding: 2% 0% 2% 2%;
         color: var(--polly_accent_yellow);
+        align-items: center;
     }
 
     #header img {
-        width: 7.5%;
-        height: auto;
+        width: auto;
+        height: 80%;
     }
 
     #header p {
@@ -87,7 +88,7 @@ export default {
     #header #login #home-button {
         border: none;
         background: transparent;
-        margin-right: 2em;
+        
     }
     #header #login #home-button:hover {
         border: none;

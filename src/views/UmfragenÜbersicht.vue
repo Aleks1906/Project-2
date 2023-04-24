@@ -1,14 +1,20 @@
 <template>
-    <div>
-        Derzeit laufende Umfragen, welche von {{ nameUserLaden() }} erstellt wurden: 
-    </div>
+    <div class="view-main-content">
+        <h1 class="view-main-content-heading">
+            Derzeit laufende Umfragen, welche von {{ nameUserLaden() }} erstellt wurden: 
+        </h1>
 
-    <div v-for="umfrage in umfragenNamen">
-            <button @click="writeToSessionStorage(umfrage), this.$router.push('/umfragenDetailÜbersicht')"> 
-                {{ umfrage }}
-             </button>
-    </div>
+        <div v-for="umfrage in umfragenNamen">
+                <button @click="writeToSessionStorage(umfrage), this.$router.push('/umfragenDetailÜbersicht')" class="view-main-content-advanceBtn"> 
+                    {{ umfrage }}
+                </button>
+        </div>
+    </div>  
 </template>
+
+<style scoped>
+
+</style>
 
 <script setup>
     import { ref, computed, onMounted, resolveDirective } from 'vue'

@@ -1,10 +1,10 @@
 <template class="triangle">
     <nav>
-        <a href="#vp-one">Value 1</a>
-        <a href="#vp-two">Value 2</a>
-        <a href="#happy-flow">Demo</a>
-        <a href="#pricing">Preise</a>
-        <a href="#cta">Get Started</a>
+        <a href="#vp-one" class="nav-links">Value 1</a>
+        <a href="#vp-two" class="nav-links">Value 2</a>
+        <a href="#happy-flow" class="nav-links">Demo</a>
+        <a href="#pricing" class="nav-links">Preise</a>
+        <a href="#cta" class="nav-links">Get Started</a>
     </nav>
     <section id="vp-one" >
         <div class="textbox" v-motion-pop-left-delay-enter>
@@ -89,21 +89,17 @@ export default {
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-around ;
+    justify-content: space-evenly ;
     align-items: center;
     width: 100%;
     height: 10vh;
-    padding: 0 15% 0;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
-    font-weight: 700;
 }
 
-nav {
-    display: flex;
-    flex-direction: row;
+nav .nav-links {
+    padding: .5% 3%;
 }
-
 /* == VP1 == */
 #vp-one {
     margin: 5% 0 10% 5%;

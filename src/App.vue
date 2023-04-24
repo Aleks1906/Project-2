@@ -122,6 +122,7 @@ a:active {
 
 .view-main-content-advanceBtn {
   color: var(--text_dark_background);
+  min-width: 10vw;
   font-weight: bold;
   background: transparent;
   border: 3px solid var(--text_dark_background);

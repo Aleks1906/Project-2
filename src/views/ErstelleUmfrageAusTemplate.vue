@@ -1,22 +1,71 @@
 <template>
   <div class="view-main-content">
     <h1 class="view-main-content-heading">Übersicht aller Templates</h1>
-    <div v-for="(template, index) in templates" :key="index">
-        <h2>{{ template }} </h2> 
-        <p>Dieses Template enthält folgende Fragen: </p>
-      <div v-for="(frage) in fragen[index]" >
-        <p>
-            {{ frage}}
-         </p>
-      </div>
-      <button @click="createFrageInFirebase(template), this.$router.push('/umfrageWurdeErstellt')">
-          Dieses Template auswählen
+
+    <div id="template-container">
+
+      <div v-for="(template, index) in templates" :key="index" id="template" class="textbox">
+          <h2 class="view-main-content-heading">{{ template }} </h2> 
+          <p>Dieses Template enthält folgende Fragen: </p>
+        <div v-for="(frage) in fragen[index]" >
+          <p>
+              {{ frage}}
+          </p>
+        </div>
+        <button @click="createFrageInFirebase(template), this.$router.push('/umfrageWurdeErstellt')" class="view-main-content-advanceBtn">
+            Template auswählen
         </button>
-        <br>
-        ---------------------------------------------------------------------
+
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.view-main-content {
+  padding-left: 0;
+  margin: 0 10%;
+  width: 80%;
+}
+#template-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#template-container #template {
+  width: 45%;
+  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 50vh;
+}
+
+#template > * {
+  margin-left: 2.5rem;
+}
+
+#template h2 {
+  padding-top: 2rem;
+}
+
+
+#template-container #template > p {
+  margin-bottom: 1.5rem;
+}
+
+#template-container #template > div p {
+  margin-bottom: .5rem;
+}
+
+#template-container #template button {
+  margin-top: 1.5em;
+  width: 30%;
+  align-self: ends;
+}
+
+</style>
   
 <script setup>
     import { ref, computed, onMounted, resolveDirective } from 'vue'
