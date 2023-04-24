@@ -5,7 +5,7 @@
       <form>
         <input type="email" id="email" name="email" placeholder="E-Mail Adresse" v-model="login.email" required>
         <input type="password" id="password" name="password" placeholder="Passwort" v-model="login.password" required>
-        <button type="button" @click="signIn">Anmelden</button>
+        <button type="button" @click="signIn">Anmelden User</button>
         <RouterLink to="/register" id="change-to-register">Noch keinen Account?</RouterLink>
       </form>
     </div>
