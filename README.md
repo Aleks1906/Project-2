@@ -8,7 +8,7 @@
   - Die Abo-Modelle der Website
   - Der Bereich für "Call to action".
   
-## An Umfrage teilnehmer als Kunde  
+## An Umfrage teilnehmen als Kunde  
 Wenn Sie auf den Button *An Umfrage teilnehmen* klicken, wird Ihnen eine Übersicht aller Umfragen aufgelistet, an denen Sie teilnehmen können. Bei jeder Umfrage können Sie den Ersteller sehen und damit zuordnen, ob Sie an diese Umfrage teilnehmen möchten oder nicht. Sie haben auch die Möglichkeit, nach einer Umfrage zu suchen.
 
 ## LogIn
