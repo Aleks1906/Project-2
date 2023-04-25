@@ -7,12 +7,12 @@
         </div>
         
         <div>
-          <input id="antworten" type="text" v-model="frageAntwortoptionen" required placeholder="Antwortoptionen" class="view-main-content-textfield">
+          <input id="antworten" type="text" v-model="frageAntwortoptionen" required placeholder="Antwortoptionen - Optionen mit Semikolon trennen" class="view-main-content-textfield">
         </div>
         <button @click="addFrage()" :disabled="addingFrage" class="view-main-content-advanceBtn">Frage hinzufügen</button>
       </form>
 
-      <button  @click="this.$router.push('/umfrageWurdeErstellt'), sessionReset()" class="view-main-content-advanceBtn">Fertig (SessionStorage löschen!)</button>
+      <button  @click="this.$router.push('/umfrageWurdeErstellt'), sessionReset()" class="view-main-content-advanceBtn">Fertig</button>
   </div>
 </template>
 

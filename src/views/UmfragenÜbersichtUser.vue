@@ -2,10 +2,11 @@
     <div class="view-main-content">
       <h1 class="view-main-content-heading">Übersicht aller Umfragen</h1>
       <input type="text" v-model="searchQuery" placeholder="Umfragen durchsuchen" class="view-main-content-textfield">
-      <div v-for="(umfragenarray, index) in filteredUmfragen" :key="index">
-        <div v-for="(umfrage) in umfragenarray" >
+      <div v-for="(umfragenarray, index) in filteredUmfragen" :key="index" id="umfragenContainer">
+        <div v-for="(umfrage) in umfragenarray" id="umfragenTemplate">
           <button @click="writeToSessionStorage(umfrage, hilfeAdmins[index][0]), this.$router.push('/beantworten')">
-            {{ umfrage }} - {{ hilfeAdmins[index][0]}}
+            <h2> {{ umfrage }} </h2>
+            erstellt von: {{ hilfeAdmins[index][0]}}
           </button>
         </div>
       </div>
@@ -30,6 +31,35 @@
       transition: 300ms;
       color: var(--polly_accent_yellow);
     }
+
+    #umfragenContainer {
+      width: 70%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    #umfragenTemplate {
+      width: 45%;
+    }
+
+    #umfragenTemplate > button {
+      width: 100%;
+      height: 8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+
+
+    #umfragenTemplate h2 {
+      margin-top: 0;
+    }
+
+    
 
 
   </style>

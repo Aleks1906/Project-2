@@ -15,9 +15,10 @@
 <script>
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import  { app } from '@/firebase'
+import  { app, db } from '@/firebase'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
+const umfragenRef = collection(db, 'AlleUmfragen');
+import { doc, addDoc, collection, setDoc} from 'firebase/firestore';
 
 export default {
     data() {
@@ -29,8 +30,11 @@ export default {
       }
     },
     methods: {
-      signUp() {
+      async signUp  () {
       const auth = getAuth(app);
+      const umfragenDoc = doc(umfragenRef, this.register.email);
+      await setDoc(umfragenDoc, {});
+
       createUserWithEmailAndPassword(auth, this.register.email, this.register.password)
       .then(userCredential => {
         const user = userCredential.user;
@@ -45,7 +49,9 @@ export default {
         alert("Die Registrierung war nicht erfolgreich: " + error.message)
 
       });
-     } 
+     },
+
+
       /*
       signUp() {
         console.log("2")

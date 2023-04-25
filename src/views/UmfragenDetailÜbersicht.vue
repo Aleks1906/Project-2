@@ -115,14 +115,16 @@
     let ergebnis = []
     let ausgabe = ""
     for(let x = 0; x < anzahlFragen; x++){
+
       let antworten = countAnswers()
       ergebnis.push([...antworten])
-      ausgabe = ausgabe + "Frage " + (x+1) + ": "+  getCurrentQuestion.value.question + "<br>Auswahlmöglichkeiten: "
+      ausgabe = ausgabe + "<br> <br> Frage " + (x+1) + ": "+  getCurrentQuestion.value.question + "<br><br><br>Auswahlmöglichkeiten: "
       for(let z = 0; z < getCurrentQuestion.value.options.length; z++){
         ausgabe = ausgabe + "<br>" +  getCurrentQuestion.value.options[z] + ", Anzahl ausgewählt: " + ergebnis[x][z] + 
         "<br>"
       }
       document.getElementById('auswertung').innerHTML = ausgabe
+      "<br"
       NextQuestion()
     }
     currentQuestion.value = 0
