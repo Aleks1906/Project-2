@@ -5,7 +5,10 @@
       <form>
         <input type="email" id="email" name="email" placeholder="E-Mail Adresse" v-model="login.email" required>
         <input type="password" id="password" name="password" placeholder="Passwort" v-model="login.password" required>
-        <button type="button" @click="signIn">Anmelden</button>
+
+        <RouterLink to="/" @click="signIn">
+          Anmelden
+        </RouterLink>
         <RouterLink to="/register" id="change-to-register">Noch keinen Account?</RouterLink>
       </form>
     </div>
@@ -13,10 +16,9 @@
 </template>
 
 <script>
-import firebase from 'firebase/app';
 import 'firebase/auth';
 import  { app } from '@/firebase'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
   data() {
@@ -36,7 +38,7 @@ export default {
           sessionStorage.setItem('EMailAdmin', this.login.email);
           console.log(sessionStorage.getItem('EMailAdmin') + " wurde erfolgreich angemeldet!")
           console.log(sessionStorage.getItem('isAdmin'))
-          this.$router.push('/');
+          location.reload()
           // Erfolgreich angemeldet
         })
         .catch((error) => {

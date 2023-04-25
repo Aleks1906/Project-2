@@ -5,7 +5,10 @@
             <form>
                 <input type="email" id="new_email" name="new_email" placeholder="E-Mail Adresse" v-model="register.email" required>
                 <input type="password" id="new_password" name="new_password" placeholder="Passwort" v-model="register.password" required>
-                <button type="button" @click="signUp">Registrieren</button>
+
+                <RouterLink to="/login" @click="signUp">
+                    Registrieren
+                </RouterLink>
                 <RouterLink to="/login" id="change-to-login">Hast du schon einen Account?</RouterLink>
             </form>
         </div>
@@ -13,12 +16,11 @@
 </template>
 
 <script>
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import  { app, db } from '@/firebase'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const umfragenRef = collection(db, 'AlleUmfragen');
-import { doc, addDoc, collection, setDoc} from 'firebase/firestore';
+import { doc, collection, setDoc} from 'firebase/firestore';
 
 export default {
     data() {
@@ -32,6 +34,8 @@ export default {
     methods: {
       async signUp  () {
       const auth = getAuth(app);
+
+      //Neuen Admin in der Collection AlleUmfragen erstellen
       const umfragenDoc = doc(umfragenRef, this.register.email);
       await setDoc(umfragenDoc, {});
 
@@ -40,7 +44,6 @@ export default {
         const user = userCredential.user;
         console.log(user);
         alert("Die Registrierung war erfolgreich")
-        this.$router.push('/login');
         // Erfolgreich registriert
       })
       .catch(error => {
@@ -50,22 +53,6 @@ export default {
 
       });
      },
-
-
-      /*
-      signUp() {
-        console.log("2")
-        firebase.auth().createUserWithEmailAndPassword(this.register.email, this.register.password)
-          .then(user => {
-            console.log(user);
-            // Erfolgreich registriert
-            
-          })
-          .catch(error => {
-            console.log(error.message);
-            // Registrierung fehlgeschlagen
-          });
-      } */
     }
 }
 </script>

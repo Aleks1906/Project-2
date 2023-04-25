@@ -12,10 +12,9 @@
               {{ frage}}
           </p>
         </div>
-        <button @click="createFrageInFirebase(template), this.$router.push('/umfrageWurdeErstellt')" class="view-main-content-advanceBtn">
-            Template auswählen
-        </button>
-
+        <RouterLink to="/umfrageWurdeErstellt" @click="createFrageInFirebase(template)">
+          Template auswählen
+        </RouterLink>
       </div>
     </div>
   </div>
@@ -68,8 +67,8 @@
 </style>
   
 <script setup>
-    import { ref, computed, onMounted, resolveDirective } from 'vue'
-    import {collection, onSnapshot, doc, addDoc, updateDoc, FieldValue, arrayUnion, getFirestore, getDocs} from 'firebase/firestore';
+    import { ref, onMounted } from 'vue'
+    import {collection, onSnapshot, addDoc, getDocs} from 'firebase/firestore';
     import { db } from '@/firebase'
  
     const templateCollectionRef = collection(db,'Templates')
@@ -79,6 +78,7 @@
     const hilfeTemplates = ref([])
 
     onMounted(() => {
+    //Templates und die entsprechenden Fragen aus Firebase laden 
     onSnapshot(templateCollectionRef, (querySnapshot) => {
       const helperTemplates = []
       querySnapshot.forEach((doc) => {
@@ -103,8 +103,11 @@
     })
   })
 
-
     const createFrageInFirebase = async (template) => {
+      /*
+      Diese Methode kopiert Daten aus der entsprechenden Template Collection und 
+      fügt sie in die Fragen-Collection der erstellten Umfrage ein
+      */
         sessionStorage.setItem('ausgewähltesTemplate', template);
         const ausgewähltesTemplate = sessionStorage.getItem('ausgewähltesTemplate')
         const umfragenName = sessionStorage.getItem('umfragenName')
@@ -115,7 +118,7 @@
 
         const querySnapshot = await getDocs(quellenRef)
         querySnapshot.forEach((doc) => {
-        // create new document in destination collection with same data
+        //Neues Dokument in der Ziel-Collection mit den gleichen Daten
          addDoc(zielRef, doc.data());
         });
     }

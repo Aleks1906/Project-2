@@ -4,10 +4,12 @@
       <input type="text" v-model="searchQuery" placeholder="Umfragen durchsuchen" class="view-main-content-textfield">
       <div v-for="(umfragenarray, index) in filteredUmfragen" :key="index" id="umfragenContainer">
         <div v-for="(umfrage) in umfragenarray" id="umfragenTemplate">
-          <button @click="writeToSessionStorage(umfrage, hilfeAdmins[index][0]), this.$router.push('/beantworten')">
-            <h2> {{ umfrage }} </h2>
-            erstellt von: {{ hilfeAdmins[index][0]}}
-          </button>
+          <RouterLink to="/beantworten" @click="writeToSessionStorage(umfrage, hilfeAdmins[index][0])">
+            <p>
+              <h2> {{ umfrage }} </h2>
+              erstellt von: {{ hilfeAdmins[index][0]}}
+            </p>  
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -76,9 +78,11 @@
   const searchQuery = ref('')
   
   onMounted(() => {
+    /*
+    Laden der laufenden Umfragen und der jeweiligen Admins, von denen die Umfragen erstellt wurden
+    */
     onSnapshot(umfragenCollectionRef, (querySnapshot) => {
       const allAdmins = []
-      const allSurveys = []
       querySnapshot.forEach((doc) => {
         console.log("All Aminds " + doc.id)
         allAdmins.push(doc.id)
@@ -107,6 +111,7 @@
   })
   
   const filteredUmfragen = computed(() => {
+    //Umsetzung der Suchleiste
     const query = searchQuery.value.toLowerCase()
     if (query === '') {
       return umfragen.value
@@ -120,9 +125,14 @@
   })
   
   const writeToSessionStorage = (umfrage, admin) => {
+    /*
+    Bei Click des Buttons mit dem Namen einer Umfrage wird diese Methode aufgerufen.
+    In der BeantowortenView.vue wird auf die SessionStorage Items umfrageBeantworten und
+    adminBeantworten zugegriffen. Auf Basis dieser Items wird der Pfad erstellt, welcher zu 
+    der entsprechenden Umfrage führt -> Damit könnten die Umfrage und die Fragen geladen werden
+    */
     sessionStorage.setItem('umfrageBeantworten', umfrage);
     sessionStorage.setItem('adminBeantworten', admin);
   }
-  
   </script>
   

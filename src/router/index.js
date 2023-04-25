@@ -45,7 +45,7 @@ const routes = [
   {
     path: '/umfragenErstellen',
     name: 'umfragenErstellen',
-    component: UmfragenErstellen //wieso nicht grün???!!!! Funktioniert sogar alles^^
+    component: UmfragenErstellen 
   },
   {
     path: '/umfragenÜbersichtUser',

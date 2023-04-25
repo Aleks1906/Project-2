@@ -10,9 +10,9 @@
         }}
     </button>
 
-    <button @click="umfrageLöschen(), this.$router.push('/')" class="view-main-content-advanceBtn" id="delete-btn">
-        {{getName()}} löschen
-    </button>
+    <RouterLink to="/" @click="umfrageLöschen()">
+      {{getName()}} löschen
+    </RouterLink>
   </div>
 
     <div id="auswertung">
@@ -49,18 +49,21 @@
 </style>
   
 <script setup>
-  import { ref, computed, onMounted, resolveDirective } from 'vue'
-  import {collection, onSnapshot, doc, deleteDoc, getDocs, updateDoc, FieldValue, arrayUnion, getFirestore} from 'firebase/firestore';
+  import { ref, computed, onMounted } from 'vue'
+  import {collection, onSnapshot, doc, deleteDoc, getDocs} from 'firebase/firestore';
 
   import { db } from '@/firebase'
   const questions = ref([{}])
   const umfragenCollectionRef = collection(db,'AlleUmfragen', sessionStorage.getItem('EMailAdmin'), 'Umfragen', sessionStorage.getItem('umfrageAuswerten'), 'Fragen')
   const deleteRef = doc(db,'AlleUmfragen', sessionStorage.getItem('EMailAdmin'), 'Umfragen', sessionStorage.getItem('umfrageAuswerten'))
-  //Wie greife ich auf EMailAdmin zu als normaler User?
-  //Wie greife ich auf Umfrage zur Kundenzufriedenheit zu?
   const quizCompleted = ref(false)
   const currentQuestion = ref(0)
   
+  /*
+    onMounted(), getCurrentQuestion(), NextQuestion()
+    funktionieren nach dem gleichen Prinzip wie in BeantwortenView.vue
+  */
+
   onMounted(() => {
     onSnapshot(umfragenCollectionRef, (querySnapshot) => {
     const fbQuestions = []
@@ -78,6 +81,7 @@
     questions.value = fbQuestions
     })
   })
+
   const getCurrentQuestion = computed(() => {
     let question = questions.value[currentQuestion.value]
     question.index = currentQuestion.value
@@ -94,6 +98,7 @@
   }
 
   const countAnswers = () => {
+    //Antworten bei einer einer Frage zählen 
     let len = getCurrentQuestion.value.options.length
     let len2 = getCurrentQuestion.value.selected.length
     let arr = new Array(len)
@@ -110,12 +115,16 @@
   }
 
   const umfrageAuswerten = () => {
+    /*
+      Antworten, die Anzahl der entsprechenden Auswahl und die Fragestellung
+      für jede Frage zusammen in den String ausgabe schreiben. Dieser wird
+      anschließend mit innerHTML in das div mit der id Auswertung geschrieben.
+    */
     currentQuestion.value = 0
     let anzahlFragen = questions.value.length
     let ergebnis = []
     let ausgabe = ""
     for(let x = 0; x < anzahlFragen; x++){
-
       let antworten = countAnswers()
       ergebnis.push([...antworten])
       ausgabe = ausgabe + "<br> <br> Frage " + (x+1) + ": "+  getCurrentQuestion.value.question + "<br><br><br>Auswahlmöglichkeiten: "
@@ -133,9 +142,12 @@
   }
 
   const getName = () => {
+    //übergibt den Namen der im Detail betrachteten Umfrage
       return sessionStorage.getItem('umfrageAuswerten')
   }
+
   const umfrageLöschen = async () => {
+    //Entfernen einer Umfrage aus Firebase
       const questionSnapshot = await getDocs(umfragenCollectionRef);
       questionSnapshot.forEach(async (doc) => {
           await deleteDoc(doc.ref);
