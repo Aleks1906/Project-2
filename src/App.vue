@@ -1,6 +1,5 @@
 <!-- eslint-disable -->
 <template>
-  <!-- eslint-disable -->
   <NavView :key="$route.fullPath"></NavView>
   <router-view/>
   <FooterView></FooterView>
@@ -21,14 +20,15 @@ export default {
 <style>
 /* Import von Fontawesome für Icons */ 
 @import "~@fortawesome/fontawesome-free/css/all.css";
+
 /* Scrollbar */
 ::-webkit-scrollbar {
-    width: 12px;
+  width: 0;
   background-color: rgba(226, 226, 226, 0.06);
     
 }
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(#FFFFFF, #FFDF53);
+    background: linear-gradient(#FFFFFF, #AD00FF);
     border-radius: 6px;
 }
 
@@ -43,7 +43,7 @@ export default {
 
 html, body {
     /* background: linear-gradient(180deg, var(--background_gradient) 22.92%, var(--polly_accent_purple) 100%); */
-    background: linear-gradient(180deg, #AD00FF 22.92%, rgba(56, 0, 217, 0.9) 100%);
+    background: linear-gradient(180deg, #AD00FF 22.92%, rgba(101, 0, 217, 0.9) 100%);
     font-family: 'Helvetica', sans-serif;
     font-size: 15px;
     font-weight: 700;
@@ -55,8 +55,6 @@ html, body {
 }
 
 /* GENERELLES */
-
-
 /* Links */
 a:link {
         border-radius: 50px;
@@ -88,13 +86,16 @@ a:active {
 
 /* ALLGEMEINES */
 .textbox {
-  box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
-  border-radius: 15px;
+  border-radius: 25px;
   background: rgba(255,255,255, 0.1);
   border-top: 1px solid rgba(255,255,255,0.5);
-  border-left: 1px solid rgba(255,255,255,0.5);
-  backdrop-filter: blur(5px);
+  border-left: 1px solid rgba(255,255,255,0.5); 
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   line-height: 1.5;
+	box-shadow: 14px 9px 18px rgba(0, 0, 0, 0.5)  ; 
+	-webkit-box-shadow: 14px 9px 18px rgba(0, 0, 0, 0.5)  ; 
+	-moz-box-shadow: 14px 9px 18px rgba(0, 0, 0, 0.5)  ; 
 }
 
 /* VIEW Specific CSS */
@@ -106,6 +107,7 @@ a:active {
   flex-direction: column;
   align-items: flex-start;
   padding-left: 20%;
+  margin-bottom: 3rem;
 }
 
 .view-main-content-heading {
