@@ -162,6 +162,7 @@ nav .nav-links {
     height: 100vh;
     display: flex;
     flex-direction: row;
+    padding-bottom: 2.5%;
 }
 
 #vp-two #iphone-mockup {
@@ -213,8 +214,8 @@ nav .nav-links {
 
 #pricing .pricing-container {
     width: 27.5vw;
-    min-height: 80%;
-    margin: auto;
+    height: 100%;
+    margin-top: 15%;
     display: flex;
     flex-direction: column;
     font-size: 1.3rem;
@@ -286,7 +287,7 @@ nav .nav-links {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 5%;
+    margin-top: 15%;
 }
 
 #cta h1 {

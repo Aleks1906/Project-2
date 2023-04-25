@@ -1,12 +1,12 @@
 <template>
     <div id="register-site">
         <div id="register-container">
-            <h1>Registrieren</h1>
+            <h1 class="view-main-content-heading">Registrieren</h1>
             <form>
                 <input type="email" id="new_email" name="new_email" placeholder="E-Mail Adresse" v-model="register.email" required>
                 <input type="password" id="new_password" name="new_password" placeholder="Passwort" v-model="register.password" required>
 
-                <RouterLink to="/login" @click="signUp">
+                <RouterLink to="/login" @click="signUp" class="linkAndButton">
                     Registrieren
                 </RouterLink>
                 <RouterLink to="/login" id="change-to-login">Hast du schon einen Account?</RouterLink>
@@ -58,69 +58,64 @@ export default {
 </script>
 
 <style>
-#register-site {
-    width: 100%;
+/* CSS für Login und Registrierung */
+#register-site,
+#login-site {
+    width: 60%;
+    margin: 0 20%;
     min-height: 65vh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#register-container {
+#register-container,
+#login-container {
     display: flex;
     flex-direction: column;
     height: 50%;
     width: 40%;
+    align-items: flex-start;
 }
 
-#register-container h1 {
+#register-container h1,
+#login-container h1 {
     text-align: left;
 }
 
-#register-container form {
+#register-container form,
+#login-container form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
 }
 
-#register-container form * {
-    border-radius: 15px;
-    border: none;
-}
-
-#register-container form input {
+#register-container form input,
+#login-container form input {
     margin-bottom: 2em;
-    width: 45%;
+    width: 90%;
     height: 3vh;
-    padding-left: 1.5em;
+    padding: .5em 1.5em;
+    border: none;
+    border-radius: 15px;
 }
 
-#register-container form button {
-  width: 45%;
-  height: 4vh;
-  transition: 800ms;
-  background: none;
-  border: 3px solid var(--text_dark_background);
-  color: var(--text_dark_background);
-  font-weight: 700;
-  font-size: 13px;
-}
-
-#register-container form button:hover {
-  scale: .95;
-  scale: .95;
-  border: 3px solid var(--polly_accent_yellow);
-  color: var(--polly_accent_yellow);
-  transition: 300ms;
-  }
-
-#register-container form #change-to-login {
-  width: 45%;
+#register-container form #change-to-login,
+#login-container form #change-to-register {
+  width: 90%;
   margin-top: 1em;
+  padding-left: 0;
   font-weight: 500;
 }
-#register-container form #change-to-login:hover {
+#register-container form #change-to-login:link,
+#register-container form #change-to-login:visited,
+#login-container form #change-to-register:link,
+#login-container form #change-to-register:link {
+  border: none;
+}
+#register-container form #change-to-login:hover,
+#login-container form #change-to-register:hover {
   scale: 1;
   text-decoration: underline;
 }

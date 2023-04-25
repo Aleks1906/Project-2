@@ -55,34 +55,36 @@ html, body {
 }
 
 /* GENERELLES */
-/* Links */
-a:link {
-        border-radius: 50px;
-        /* color: var(--background_gradient_2);
-        background-color: var(--polly_accent_yellow); */
-        color: var(--text_dark_background);
-        border: 3px solid var(--text_dark_background);
-        text-decoration: none;
-        padding: 1% 4%;
+/* Links und Router-Link, sowie Button styling */
+a:link,
+.linkAndButton:link {
+  color: var(--text_dark_background);
+  text-decoration: none;
+  padding: 1rem 2.5rem;
+  border: 3px solid var(--text_dark_background);
+  transition: 800ms;
+  border-radius: 25px;
+}
+a:visited,
+.linkAndButton:visited {            
+  color: var(--text_dark_background);
+  text-decoration: none;
+  border: 3px solid var(--text_dark_background);
+  transition: 800ms;
+  padding: .75rem 2rem;
+
+}
+a:hover,
+.linkAndButton:hover {
+  color: var(--polly_accent_yellow);
+  transition: 300ms;
+  border: 3px solid var(--polly_accent_yellow)
+}
+a:active,
+.linkAndButton:active {
         transition: 800ms;
     }
-a:visited {            
-        /* color: var(--background_gradient_2);
-        background-color: var(--polly_accent_yellow); */
-        color: var(--text_dark_background);
-        border: 3px solid var(--text_dark_background);
-        text-decoration: none;
-        transition: 800ms;
-    }
-a:hover {
-        scale: .95;
-        border: 3px solid var(--polly_accent_yellow);
-        color: var(--polly_accent_yellow);
-        transition: 300ms;
-    }
-a:active {
-        transition: 800ms;
-    }
+
 
 /* ALLGEMEINES */
 .textbox {
@@ -101,12 +103,12 @@ a:active {
 /* VIEW Specific CSS */
 
 .view-main-content {
-  width: 100%;
+  width: 70%;
   min-height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 20%;
+  padding: 0 15%;
   margin-bottom: 3rem;
 }
 

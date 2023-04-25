@@ -7,14 +7,14 @@
       <div v-for="(template, index) in templates" :key="index" id="template" class="textbox">
           <h2 class="view-main-content-heading">{{ template }} </h2> 
           <p>Dieses Template enthält folgende Fragen: </p>
-        <div v-for="(frage) in fragen[index]" >
-          <p>
-              {{ frage}}
-          </p>
-        </div>
-        <RouterLink to="/umfrageWurdeErstellt" @click="createFrageInFirebase(template)">
-          Template auswählen
-        </RouterLink>
+          <div v-for="(frage) in fragen[index]" >
+            <p>
+                {{ frage}}
+            </p>
+          </div>
+          <RouterLink to="/umfrageWurdeErstellt" @click="createFrageInFirebase(template)" class="linkAndButton">
+            Template auswählen
+          </RouterLink>
       </div>
     </div>
   </div>
@@ -31,6 +31,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  height: 100%;
 }
 
 #template-container #template {
@@ -38,7 +39,6 @@
   margin-bottom: 5rem;
   display: flex;
   flex-direction: column;
-  min-height: 50vh;
 }
 
 #template > * {
@@ -46,22 +46,18 @@
 }
 
 #template h2 {
-  padding-top: 2rem;
+  padding-top: 1.5rem;
+}
+#template-container #template div p {
+  margin-bottom: 1rem;
+  padding: 0 1.5rem;
 }
 
-
-#template-container #template > p {
-  margin-bottom: 1.5rem;
-}
-
-#template-container #template > div p {
-  margin-bottom: .5rem;
-}
-
-#template-container #template button {
-  margin-top: 1.5em;
-  width: 30%;
-  align-self: ends;
+#template-container #template .linkAndButton {
+  width: 40%;
+  margin-bottom: 2rem;
+  margin-top: auto;
+  text-align: center;
 }
 
 </style>

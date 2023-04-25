@@ -98,7 +98,7 @@ export default {
 
     #header #login #home-button i {
         font-size: 1.5em;
-        margin-right: -7em;
+        margin-right: -4em;
     }
 </style>
 

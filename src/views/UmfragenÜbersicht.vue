@@ -1,7 +1,7 @@
 <template>
     <div class="view-main-content">
         <h1 class="view-main-content-heading">
-            Derzeit laufende Umfragen, welche von {{ nameUserLaden() }} erstellt wurden: 
+            Derzeit laufende Umfragen von {{ nameUserLaden() }} 
         </h1>
 
         <div v-for="umfrage in umfragenNamen">
@@ -14,6 +14,16 @@
 </template>
 
 <style scoped>
+
+    .view-main-content .view-main-content-heading {
+        margin-bottom: 3rem;
+    }
+    .view-main-content a:link,
+    .view-main-content a:visited {
+        padding: .75rem 2rem;
+        border-radius: 10px;
+    }
+
 
 </style>
 

@@ -5,12 +5,11 @@
         <div>
           <input type="text" id="umfrage-name" v-model="umfrageName" required placeholder="Gib der Umfrage einen Namen" class="view-main-content-textfield">
         </div>
-        <br>
-        <RouterLink to="/fragenErstellen" @click="addUmfrage()">
+        <RouterLink to="/fragenErstellen" @click="addUmfrage()" class="linkAndButton">
           Fragen erstellen
         </RouterLink>
         
-        <RouterLink to="/erstelleUmfrageAusTemplate" @click="addUmfrage()">
+        <RouterLink to="/erstelleUmfrageAusTemplate" @click="addUmfrage()" class="linkAndButton">
           Erstelle aus einem Template
         </RouterLink>
       </form>
@@ -18,14 +17,23 @@
   </template>
 
   <style scoped>
-    input {
-      min-width: 15vw;
-      margin-top: 1.5rem;
-    }
+  form {
+    width: 100%;
+  }
 
-    button:first-of-type {
-      margin-right: 2rem;
-    }
+  input {
+    width: 50%;
+    margin-top: 1.5rem;
+  }
+
+  .linkAndButton {
+    padding: .5rem 2rem;
+    margin-right: 2em;
+  }
+
+
+
+ 
   </style>
   
   <script setup>

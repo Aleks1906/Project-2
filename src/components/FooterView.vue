@@ -2,7 +2,7 @@
     <footer>
         <div id="imprint">
             <router-link to="/imprint">Impressum</router-link>
-            <router-link to="/index">Datenschutz</router-link>
+            <router-link to="/imprint">Datenschutz</router-link>
         </div>
         <div id="copyright">
             Erstellt für PROJEKT2 von: <br>
@@ -57,5 +57,10 @@ footer #copyright {
 
 footer #imprint a:first-of-type {
     margin-bottom: 2em;
+}
+
+footer a:link,
+footer a:visited {
+    padding: .5rem 1.5rem;
 }
 </style>

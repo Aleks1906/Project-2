@@ -11,7 +11,7 @@
         </div>
         <button @click="addFrage()" :disabled="addingFrage" class="view-main-content-advanceBtn">Frage hinzufügen</button>
       </form>
-      <RouterLink to="/umfrageWurdeErstellt" @click="sessionReset()">
+      <RouterLink to="/umfrageWurdeErstellt" @click="sessionReset()" class="linkAndButton">
         Fertig
       </RouterLink>
   </div>
@@ -28,7 +28,13 @@
     width: 100%;
   }
   .view-main-content .view-main-content-advanceBtn {
-    width: 15vw;
+    width: 30%;
+  }
+
+  .linkAndButton {
+    padding: .5em 2em;
+    width: 10%;
+    text-align: center;
   }
 </style>
 

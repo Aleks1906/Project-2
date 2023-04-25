@@ -3,10 +3,10 @@
       <h1 class="view-main-content-heading">Übersicht aller Umfragen</h1>
       <input type="text" v-model="searchQuery" placeholder="Umfragen durchsuchen" class="view-main-content-textfield">
       <div v-for="(umfragenarray, index) in filteredUmfragen" :key="index" id="umfragenContainer">
-        <div v-for="(umfrage) in umfragenarray" id="umfragenTemplate">
+        <div v-for="(umfrage) in umfragenarray" id="umfragenTemplate" class="linkAndButton">
           <RouterLink to="/beantworten" @click="writeToSessionStorage(umfrage, hilfeAdmins[index][0])">
+            <h2> {{ umfrage }} </h2>
             <p>
-              <h2> {{ umfrage }} </h2>
               erstellt von: {{ hilfeAdmins[index][0]}}
             </p>  
           </RouterLink>
@@ -16,26 +16,13 @@
   </template>
 
   <style scoped>
-    button {
-      color: var(--text_dark_background);
-      font-weight: bold;
-      background: transparent;
-      border: 3px solid var(--text_dark_background);
-      cursor: pointer;
-      margin-bottom: 1em;
-      padding: .7rem 1rem;
-      border-radius: 10px;
-      transition: 500ms;
-    }
-
-    button:hover {
-      transform: scale(1.02);
-      transition: 300ms;
-      color: var(--polly_accent_yellow);
+    .view-main-content input {
+      width: 50%;
     }
 
     #umfragenContainer {
-      width: 70%;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -44,23 +31,29 @@
 
     #umfragenTemplate {
       width: 45%;
+      border: 2px solid var(--text_dark_background);
+      border-radius: 15px;
+      margin-top: 2em;
     }
 
-    #umfragenTemplate > button {
-      width: 100%;
-      height: 8rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
+    #umfragenTemplate:hover {
+      border-color: var(--polly_accent_yellow);
+      color: var(--polly_accent_yellow);
+      scale: 0.98;
     }
 
-
+    #umfragenTemplate * {
+      padding-left: 1rem;
+    }
 
     #umfragenTemplate h2 {
       margin-top: 0;
     }
-
+    
+    #umfragenContainer #umfragenTemplate a:link,
+    #umfragenContainer #umfragenTemplate a:visited {
+      border: none;
+    }
     
 
 

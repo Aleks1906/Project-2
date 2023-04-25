@@ -1,18 +1,19 @@
 <template>
   <div class="view-main-content">
     <div id="option-container">
-    <button class="view-main-content-advanceBtn"
-    @click="umfrageAuswerten()"
-        > 
-        {{getName()}}
-        {{ 
-        ' auswerten'
-        }}
-    </button>
+      <h1 class="view-main-content-heading">{{getName()}}</h1>  
+      <button
+      @click="umfrageAuswerten()"
+          > 
+          {{getName()}}
+          {{ 
+          ' auswerten'
+          }}
+      </button>
 
-    <RouterLink to="/" @click="umfrageLöschen()">
-      {{getName()}} löschen
-    </RouterLink>
+      <RouterLink to="/" @click="umfrageLöschen()" id="delete-btn">
+        {{getName()}} löschen
+      </RouterLink>
   </div>
 
     <div id="auswertung">
@@ -23,6 +24,7 @@
 <style scoped>
 .view-main-content {
   display: flex;
+  height: 80vh;
   flex-direction: column;
   justify-content: flex-start;
   align-items: space-around;
@@ -30,22 +32,45 @@
 
 .view-main-content #option-container {
   display: flex;
-  flex-direction: row;
-  width: 30%;
+  flex-direction: column;
+  width: 70%;
   justify-content: space-around;
 }
 
-.view-main-content #delete-btn:hover {
-  border-color: red;
+.view-main-content #option-container button,
+.view-main-content #option-container #delete-btn {
+  border: 3px solid var(--text_dark_background);
+  border-radius: 25px;
+  min-width: 30%;
+  background-color: transparent;
+  height: 20%;
+  color: var(--text_dark_background);
+  font-family: 'Helvetica', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  padding: .75rem 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  transition: 700ms;
+}
+.view-main-content #option-container button:hover {
+  scale: 0.98;
+  color: var(--polly_accent_yellow);
+  border-color: var(--polly_accent_yellow);
+  transition: 500ms;
+}
+
+.view-main-content #option-container #delete-btn:hover {
   color: red;
+  border-color: red;
+  scale: 0.98;
+  transition: 500ms;
 }
 
 .view-main-content #auswertung {
   align-self: flex-start;
   padding-left: 4rem;
 }
-
-
 </style>
   
 <script setup>

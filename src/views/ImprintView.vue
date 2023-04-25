@@ -1,9 +1,9 @@
 <template>
-    <h3>Impressum</h3>
+    <div class="view-main-content">
+        <h1>Impressum</h1>
+    </div>  
 </template>
 
 <style>
-h3 {
-    color: red;
-}
+
 </style>
