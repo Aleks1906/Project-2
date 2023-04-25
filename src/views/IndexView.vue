@@ -213,7 +213,7 @@ nav .nav-links {
 
 #pricing .pricing-container {
     width: 27.5vw;
-    height: 80%;
+    min-height: 80%;
     margin: auto;
     display: flex;
     flex-direction: column;
