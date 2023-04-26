@@ -1,19 +1,22 @@
 <template>
   <div class="view-main-content">
     <div id="option-container">
-      <h1 class="view-main-content-heading">{{getName()}}</h1>  
-      <button
-      @click="umfrageAuswerten()"
-          > 
-          {{getName()}}
-          {{ 
-          ' auswerten'
-          }}
-      </button>
+      <h1 class="view-main-content-heading">{{getName()}}</h1> 
+      <div id="umfrage-options"> 
+        <button
+        @click="umfrageAuswerten()"
+            > 
+            {{getName()}}
+            {{ 
+            ' auswerten'
+            }}
+        </button>
 
-      <RouterLink to="/" @click="umfrageLöschen()" id="delete-btn">
-        {{getName()}} löschen
-      </RouterLink>
+        <RouterLink to="/" @click="umfrageLöschen()" id="delete-btn">
+          
+          {{getName()}} löschen
+        </RouterLink>
+    </div>
   </div>
 
     <div id="auswertung">
@@ -24,7 +27,7 @@
 <style scoped>
 .view-main-content {
   display: flex;
-  height: 80vh;
+  min-height: 80vh;
   flex-direction: column;
   justify-content: flex-start;
   align-items: space-around;
@@ -33,8 +36,14 @@
 .view-main-content #option-container {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
   justify-content: space-around;
+}
+
+.view-main-content #option-container #umfrage-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .view-main-content #option-container button,
@@ -43,7 +52,7 @@
   border-radius: 25px;
   min-width: 30%;
   background-color: transparent;
-  height: 20%;
+  height: 15%;
   color: var(--text_dark_background);
   font-family: 'Helvetica', sans-serif;
   font-weight: 700;
@@ -53,6 +62,10 @@
   text-align: center;
   transition: 700ms;
 }
+
+.view-main-content #option-container button {
+  min-width: 40%;
+}
 .view-main-content #option-container button:hover {
   scale: 0.98;
   color: var(--polly_accent_yellow);
@@ -60,16 +73,22 @@
   transition: 500ms;
 }
 
-.view-main-content #option-container #delete-btn:hover {
+.view-main-content #option-container .delete-text {
+  color: red;
+}
+
+.view-main-content #option-container #delete-btn:hover,
+.view-main-content #option-container {
   color: red;
   border-color: red;
-  scale: 0.98;
+  transform: scale(0.98);
   transition: 500ms;
 }
 
 .view-main-content #auswertung {
   align-self: flex-start;
   padding-left: 4rem;
+  margin-bottom: 5rem;
 }
 </style>
   

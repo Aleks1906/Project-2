@@ -26,6 +26,8 @@
     .view-main-content a:link,
     .view-main-content a:visited {
         border: none;
+        width: 100%;
+        height: 100%;
     }
 
     #umfragen-container {
@@ -44,6 +46,7 @@
         margin-bottom: 3rem;
         text-align: center;
         transition: 700ms;
+        cursor: pointer;
     }
 
     #umfragen-container div:hover {

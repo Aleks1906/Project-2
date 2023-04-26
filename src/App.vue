@@ -42,7 +42,6 @@ export default {
 }
 
 html, body {
-    /* background: linear-gradient(180deg, var(--background_gradient) 22.92%, var(--polly_accent_purple) 100%); */
     background: linear-gradient(180deg, #AD00FF 22.92%, rgba(101, 0, 217, 0.9) 100%);
     font-family: 'Helvetica', sans-serif;
     font-size: 15px;
