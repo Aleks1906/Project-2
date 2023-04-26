@@ -3,26 +3,60 @@
         <h1 class="view-main-content-heading">
             Derzeit laufende Umfragen von {{ nameUserLaden() }} 
         </h1>
+        <div id="umfragen-container">
+            <div v-for="umfrage in umfragenNamen">
 
-        <div v-for="umfrage in umfragenNamen">
-
-            <RouterLink to="/umfragenDetailÜbersicht" @click="writeToSessionStorage(umfrage)">
-                {{ umfrage }}
-            </RouterLink>
-        </div>
+                <RouterLink to="/umfragenDetailÜbersicht" @click="writeToSessionStorage(umfrage)">
+                    {{ umfrage }}
+                </RouterLink>
+            </div>
+        </div>    
     </div>  
 </template>
 
 <style scoped>
+
+    .view-main-content {
+        min-height: 80vh;
+    }
 
     .view-main-content .view-main-content-heading {
         margin-bottom: 3rem;
     }
     .view-main-content a:link,
     .view-main-content a:visited {
+        border: none;
+    }
+
+    #umfragen-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    #umfragen-container > div {
+        width: 30%;
+        border: 3px solid var(--text_dark_background);
         padding: .75rem 2rem;
         border-radius: 10px;
+        margin-bottom: 3rem;
+        text-align: center;
+        transition: 700ms;
     }
+
+    #umfragen-container div:hover {
+        scale: 0.98;
+        border-color: var(--polly_accent_yellow);
+        color: var(--polly_accent_yellow);
+        transition: 500ms;
+    }
+
+    #umfragen-container div:hover a {
+        color: var(--polly_accent_yellow);
+    }
+
 
 
 </style>
