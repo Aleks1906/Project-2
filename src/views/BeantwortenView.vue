@@ -1,6 +1,6 @@
 <template>
     <main class="app view-main-content">
-      <h1 class="view-main-content-heading">Umfrage Kundenzufriedenheit</h1>
+      <h1 class="view-main-content-heading"> {{ getName() }} </h1>
       <section class="quiz" v-if="!quizCompleted">
         <div class = "quiz-info">
           <span class="question">
@@ -154,5 +154,9 @@
       }
       
       quizCompleted.value = true //wenn keine Frage, dann ist die Umfrage beendet
+    }
+
+    const getName = () => {
+        return sessionStorage.getItem('umfrageBeantworten')
     }
   </script>
