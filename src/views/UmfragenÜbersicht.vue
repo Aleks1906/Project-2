@@ -31,7 +31,7 @@
     #umfragen-container {
         display: flex;
         flex-direction: row;
-        width: 100%;
+        width: 85%;
         justify-content: space-between;
         flex-wrap: wrap;
     }
