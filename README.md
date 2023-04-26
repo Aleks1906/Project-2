@@ -34,4 +34,7 @@ Wenn Sie jedoch selbst eine neue Umfrage erstellen möchten, können Sie diese m
 Die laufenden Umfragen lassen sich im Bereich *Umfragen einsehen* anschauen. Zunächst werden diese untereinander aufgelistet. Wenn Sie eine dieser Umfragen auswählen, werden Sie auf eine weitere Seite umgeleitet, in der Sie eine Umfrage entweder auswerten oder löschen können. Die Aktionen lassen sich über die Buttons *Umfrage auswerten* bzw. *Umfrage löschen* durchführen.
 
 ## Link zur Firebase
-Unter folgendem Link kommen Sie zur Firebase: https://console.firebase.google.com/project/polly-27e70/firestore
+Unter folgendem Link kommen Sie zur Firebase: https://console.firebase.google.com/project/polly-27e70/firestore (Einladung kam separat per Mail)
+
+## Link zum Pitch:
+https://pitch.com/public/4a3baf41-e5e5-40fd-bf74-b1aa9a49a96f
